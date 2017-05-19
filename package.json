@@ -4,9 +4,8 @@
   "version": "0.0.26-SNAPSHOT",
   "main": "index.js",
   "scripts": {
-    "generate": "generate-registry-typescript ./src/generated/registry",
     "compile": "tsc",
-    "build": "npm run generate && npm run compile",
+    "build": "npm run compile",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node bin/index.js",
     "docker-build-local": "create-docker-context-for-node-component --build --push --tag auto --local",
@@ -24,6 +23,7 @@
   },
   "dependencies": {
     "@magda/registry-aspects": "^0.0.26-SNAPSHOT",
+    "@magda/typescript-common": "^0.0.26-SNAPSHOT",
     "@magda/scripts": "^0.0.26-SNAPSHOT",
     "moment": "^2.17.1",
     "request": "^2.79.0",
