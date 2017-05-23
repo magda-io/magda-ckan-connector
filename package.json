@@ -2,7 +2,7 @@
   "name": "@magda/ckan-connector",
   "description": "MAGDA CKAN Connector",
   "version": "0.0.26-SNAPSHOT",
-  "main": "index.js",
+  "main": "bin/index.js",
   "scripts": {
     "compile": "tsc",
     "build": "npm run compile",
