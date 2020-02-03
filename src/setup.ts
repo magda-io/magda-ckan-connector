@@ -1,5 +1,5 @@
-import addJwtSecretFromEnvVar from "magda-typescript-common/src/session/addJwtSecretFromEnvVar";
-import AspectBuilder from "magda-typescript-common/src/AspectBuilder";
+import { addJwtSecretFromEnvVar } from "@magda/utils";
+import { AspectBuilder } from "@magda/connector-sdk";
 import createTransformer from "./createTransformer";
 import fs from "fs";
 import yargs from "yargs";
