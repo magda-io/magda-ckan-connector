@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: 
+      - master
+jobs:
+  build-test:
+    name: Build & Test
+    strategy:
+      matrix:
+        node: [8, 10]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node }}
+      uses: actions/setup-node@v1.2
+      with:
+        node-version: ${{ matrix.node }}
+    - run: yarn install
+    - run: yarn build
+    - run: yarn test
