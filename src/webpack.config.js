@@ -1,18 +1,19 @@
 const path = require("path");
 const webpack = require("webpack");
-const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 const configFile = path.resolve(__dirname, "../tsconfig.json");
 
 module.exports = {
     entry: "./src/createTransformer.ts",
     mode: "production",
+    target: "web",
     output: {
         filename: "createTransformerForBrowser.js",
         path: path.join(__dirname, "..", "dist"),
         library: "createTransformer"
     },
     devtool: "source-map",
+    stats: "errors-only",
     module: {
         rules: [
             {
@@ -21,7 +22,6 @@ module.exports = {
                 loader: "ts-loader",
                 options: {
                     configFile,
-                    projectReferences: true,
                     compilerOptions: {
                         lib: ["es5"]
                     }
@@ -30,11 +30,6 @@ module.exports = {
         ]
     },
     resolve: {
-        plugins: [
-            new TsconfigPathsPlugin({
-                configFile
-            })
-        ],
         extensions: [".tsx", ".ts", ".js"]
     },
     node: {

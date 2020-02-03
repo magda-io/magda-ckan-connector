@@ -3,11 +3,12 @@ import "mocha";
 import nock from "nock";
 import Ckan from "../Ckan";
 import CkanTransformer from "../CkanTransformer";
-import JsonConnector, {
-    JsonConnectorConfig
-} from "magda-typescript-common/src/JsonConnector";
-import Registry from "magda-typescript-common/src/registry/AuthorizedRegistryClient";
-import AspectBuilder from "@magda/typescript-common/src/AspectBuilder";
+import {
+    JsonConnector,
+    JsonConnectorConfig,
+    AuthorizedRegistryClient as Registry,
+    AspectBuilder
+} from "@magda/connector-sdk";
 
 describe("JsonTransformer", () => {
     before(() => {

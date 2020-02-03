@@ -1,6 +1,8 @@
 import Ckan from "./Ckan";
-import JsonConnector from "magda-typescript-common/src/JsonConnector";
-import Registry from "magda-typescript-common/src/registry/AuthorizedRegistryClient";
+import {
+    JsonConnector,
+    AuthorizedRegistryClient as Registry
+} from "@magda/connector-sdk";
 import { argv, transformer, transformerOptions } from "./setup";
 
 const ckan = new Ckan({
