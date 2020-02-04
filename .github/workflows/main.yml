@@ -18,7 +18,7 @@ jobs:
     - name: helm-check
       uses: igabaydulin/helm-check-action@0.1.4
       env:
-        CHART_LOCATION: ./deploy/charts/magda-connector-chart
+        CHART_LOCATION: ./deploy/charts/magda-ckan-connector
         CHART_VALUES: ./deploy/test-deploy.yaml
     - name: Login to GitHub Package Repository
       env:
