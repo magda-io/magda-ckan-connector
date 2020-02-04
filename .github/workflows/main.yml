@@ -1,12 +1,10 @@
-name: master branch CI
+name: Main CI Workflow
 
-on:
-  push:
-    branches: 
-      - master
+on: push
+
 jobs:
-  build-test:
-    name: Build & Test
+  build-test-docker:
+    name: Build, Test & Push to Docker
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -17,9 +15,29 @@ jobs:
     - run: yarn install
     - run: yarn build
     - run: yarn test
+    - name: helm-check
+      uses: igabaydulin/helm-check-action@0.1.4
+      env:
+        CHART_LOCATION: ./deploy/charts/magda-connector-chart
+        CHART_VALUES: ./deploy/test-deploy.yaml
     - name: Login to GitHub Package Repository
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: docker login docker.pkg.github.com -u literallyanything -p ${GH_TOKEN}
     - name: Build Docker Image & Push 
       run: yarn docker-build-prod --repository=docker.pkg.github.com/magda-io/magda-ckan-connector --version=${GITHUB_SHA}
+    
+  build-test-node-8:
+    name: Build, Test Only with Node 8
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 8
+      uses: actions/setup-node@v1
+      with:
+        node-version: 8
+    - run: yarn install
+    - run: yarn build
+    - run: yarn test
+
+
