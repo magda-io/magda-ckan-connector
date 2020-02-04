@@ -1,0 +1,44 @@
+global:
+  image: {}
+
+image: 
+  name: "magda-ckan-connector"
+  repository: docker.pkg.github.com/magda-io/magda-ckan-connector
+  tag: latest
+  pullPolicy: IfNotPresent
+  # imagePullSecret: ""
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 30Mi
+  limits:
+    cpu: 100m
+
+includeInitialJobs: true
+includeCronJobs: false
+defaultTenantId: 0
+
+config:
+  ## Unique id to identify this connector and records that are harvested from it
+  id: dga
+  ## Friendly readable name
+  name: "data.gov.au"
+  ## The base URL of the place to source data from
+  sourceUrl: "https://data.gov.au/data/"
+  ## When crawling through from beginning to end, how big should the individual requests be in records?
+  pageSize: 1000
+  
+  ## Crontab schedule for how often this should happen.
+  # default = "0 14 * * 6" i.e. 12am Sydney time on Sunday
+  # schedule?: string;
+
+  ## CKAN-specific config: what harvest sources to ignore. * will ignore everything that's been harvested
+  ## from another portal
+
+  ignoreHarvestSources: ["*"]
+
+  # allowedOrganisationNames?: string[];
+  # ignoreOrganisationNames?: string[];
+  # extras?: JsonConnectorConfigExtraMetaData;
+  # presetRecordAspects?: JsonConnectorConfigPresetAspect[];
