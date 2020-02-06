@@ -2,9 +2,9 @@ global:
   image: {}
 
 image: 
-  name: "magda-ckan-connector"
-  repository: docker.pkg.github.com/magda-io/magda-ckan-connector
-  tag: latest
+  name: "data61/magda-ckan-connector"
+  repository: docker.io
+  tag: 0.0.57-0
   pullPolicy: IfNotPresent
   # imagePullSecret: ""
 
