@@ -1,0 +1,15 @@
+apiVersion: v1
+entries:
+  magda-ckan-connector:
+  - apiVersion: v1
+    created: "2020-02-06T03:56:18.249177422Z"
+    description: A Helm chart for Magda Ckan Connector
+    digest: ad4efc396c143c93f72a5eed9206b370cc5a52e7519233553e7c85f3d5d3099a
+    home: https://github.com/magda-io/magda-ckan-connector
+    name: magda-ckan-connector
+    sources:
+    - https://github.com/magda-io/magda-ckan-connector
+    urls:
+    - https://magda-io.github.io/magda-ckan-connector/charts/magda-ckan-connector-0.0.57-0-beta-1.tgz
+    version: 0.0.57-0-beta-1
+generated: "2020-02-06T03:56:18.248799016Z"
