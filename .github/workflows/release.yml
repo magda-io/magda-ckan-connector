@@ -26,13 +26,21 @@ jobs:
         CHART_LOCATION: ./deploy/charts/magda-ckan-connector
         CHART_VALUES: ./deploy/test-deploy.yaml
 
+    - name: Login to GitHub Package Repository
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: docker login docker.pkg.github.com -u literallyanything -p ${GH_TOKEN}
+
+    - name: Build Docker Image & Push to Github Registry
+      run: yarn docker-build-prod --repository=docker.pkg.github.com/magda-io/magda-ckan-connector --name=magda-ckan-connector
+
     - name: Login to Docker Hub
       env:
         DH_TOKEN: ${{ secrets.DOCKER_HUB_PASSWORD }}
       run: docker login -u magdabot -p ${DH_TOKEN}
 
-    - name: Build Docker Image & Push 
-      run: yarn docker-build-prod
+    - name: Re-tag & Push Docker Image to Docker Hub 
+      run: yarn retag-and-push --fromPrefix=docker.pkg.github.com/magda-io/magda-ckan-connector/ --fromName=magda-ckan-connector
 
     - name: Configure Git
       run: |
@@ -43,15 +51,17 @@ jobs:
       uses: azure/setup-helm@v1
       with:
         version: v2.16.1
-
+      
     - name: Release Helm Chart  
       env:
         CR_TOKEN: "${{ secrets.GITHUB_ACCESS_TOKEN }}"
       run: |
         owner=$(cut -d '/' -f 1 <<< "$GITHUB_REPOSITORY")
         repo=$(cut -d '/' -f 2 <<< "$GITHUB_REPOSITORY")
+
         echo "Sync with existing charts under gh-pages branch..."
         mkdir -p .helm-release-packages/charts
+
         gh_pages_worktree=$(mktemp -d)
         git worktree add "$gh_pages_worktree" gh-pages
         
@@ -59,8 +69,9 @@ jobs:
         then
             mkdir -p ${gh_pages_worktree}/charts
         else 
-            cp -R ${gh_pages_worktree}/charts .helm-release-packages/charts
+            cp -r ${gh_pages_worktree}/charts/* .helm-release-packages/charts/
         fi
+
         echo "Packing current version helm charts..."
         helm package ./deploy/charts/magda-ckan-connector --destination .helm-release-packages/charts --dependency-update --save=false
         
@@ -76,3 +87,4 @@ jobs:
         git commit --message="Update helm repo" --signoff
         git push "https://x-access-token:$CR_TOKEN@github.com/$owner/$repo" gh-pages
         popd > /dev/null
+        
