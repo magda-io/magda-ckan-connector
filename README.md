@@ -23,3 +23,10 @@ The [helm chart](https://helm.sh/docs/topics/charts/) for this connector is auto
 helm repo add magda-ckan-connector https://magda-io.github.io/magda-ckan-connector
 ```
 
+### Docker Image 
+
+Docker image releases can be found from Docker Hub:
+
+https://hub.docker.com/r/data61/magda-ckan-connector/
+
+Development releases (per commit) are also available from [GitHub Registry](https://github.com/magda-io/magda-ckan-connector/packages) and accessible with access token.
