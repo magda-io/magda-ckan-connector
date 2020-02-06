@@ -1,0 +1,78 @@
+name: CI Release Helm Chart
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  release-helm-chart:
+    name: Release Helm Chart
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    # fetch gh-pages branch only
+    - run: git fetch --no-tags --prune --depth=1 origin +refs/heads/gh-pages:refs/remotes/origin/gh-pages
+
+    - name: Use Node.js 10
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10
+    - run: yarn install
+    - run: yarn build
+    - run: yarn test
+    - name: helm-check
+      uses: igabaydulin/helm-check-action@0.1.4
+      env:
+        CHART_LOCATION: ./deploy/charts/magda-ckan-connector
+        CHART_VALUES: ./deploy/test-deploy.yaml
+
+    - name: Login to Docker Hub
+      env:
+        DH_TOKEN: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      run: docker login -u magdabot -p ${DH_TOKEN}
+
+    - name: Build Docker Image & Push 
+      run: yarn docker-build-prod
+
+    - name: Configure Git
+      run: |
+        git config user.name "$GITHUB_ACTOR"
+        git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+    
+    - name: Setup Helm
+      uses: azure/setup-helm@v1
+      with:
+        version: v2.16.1
+
+    - name: Release Helm Chart  
+      env:
+        CR_TOKEN: "${{ secrets.GITHUB_ACCESS_TOKEN }}"
+      run: |
+        owner=$(cut -d '/' -f 1 <<< "$GITHUB_REPOSITORY")
+        repo=$(cut -d '/' -f 2 <<< "$GITHUB_REPOSITORY")
+        echo "Sync with existing charts under gh-pages branch..."
+        mkdir -p .helm-release-packages/charts
+        gh_pages_worktree=$(mktemp -d)
+        git worktree add "$gh_pages_worktree" gh-pages
+        
+        if [[ ! -d "${gh_pages_worktree}/charts" ]]
+        then
+            mkdir -p ${gh_pages_worktree}/charts
+        else 
+            cp -R ${gh_pages_worktree}/charts .helm-release-packages/charts
+        fi
+        echo "Packing current version helm charts..."
+        helm package ./deploy/charts/magda-ckan-connector --destination .helm-release-packages/charts --dependency-update --save=false
+        
+        echo "Re-Create helm repo index..."
+        helm repo index .helm-release-packages/charts --url https://${owner}.github.io/${repo}/charts
+        
+        echo "Commit helm charts to gh-pages branch..."
+        cp --force .helm-release-packages/charts/index.yaml ${gh_pages_worktree}/index.yaml
+        unlink .helm-release-packages/charts/index.yaml
+        cp --force -u .helm-release-packages/charts/* ${gh_pages_worktree}/charts/
+        pushd "$gh_pages_worktree" > /dev/null
+        git add --all
+        git commit --message="Update helm repo" --signoff
+        git push "https://x-access-token:$CR_TOKEN@github.com/$owner/$repo" gh-pages
+        popd > /dev/null

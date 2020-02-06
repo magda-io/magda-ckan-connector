@@ -25,7 +25,7 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: docker login docker.pkg.github.com -u literallyanything -p ${GH_TOKEN}
     - name: Build Docker Image & Push 
-      run: yarn docker-build-prod --repository=docker.pkg.github.com/magda-io/magda-ckan-connector --version=${GITHUB_SHA}
+      run: yarn docker-build-prod --repository=docker.pkg.github.com/magda-io/magda-ckan-connector --name=magda-ckan-connector --version=${GITHUB_SHA}
     
   build-test-node-8:
     name: Build, Test Only with Node 8
