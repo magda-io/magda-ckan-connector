@@ -9,7 +9,6 @@ image:
   # imagePullSecret: 
 
 defaultImage:
-  name: "data61/magda-ckan-connector"
   repository: docker.io
   tag: 0.0.57-0
   pullPolicy: IfNotPresent
