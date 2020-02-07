@@ -69,5 +69,10 @@
     "categories": {
       "connector": true
     }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
