@@ -2,14 +2,14 @@ global:
   image: {}
 
 image: 
-  name: "data61/magda-ckan-connector"
+  name: "magda-ckan-connector"
   # repository: 
   # tag: 
   # pullPolicy: 
   # imagePullSecret: 
 
 defaultImage:
-  repository: docker.io
+  repository: docker.io/data61
   tag: 0.0.57-0
   pullPolicy: IfNotPresent
   # imagePullSecret: ""
