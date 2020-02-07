@@ -51,40 +51,21 @@ jobs:
       uses: azure/setup-helm@v1
       with:
         version: v2.16.1
+
+    - name: Setup AWS CLi Tools
+      uses: chrislennon/action-aws-cli@v1.1
       
     - name: Release Helm Chart  
       env:
         CR_TOKEN: "${{ secrets.GITHUB_ACCESS_TOKEN }}"
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
-        owner=$(cut -d '/' -f 1 <<< "$GITHUB_REPOSITORY")
-        repo=$(cut -d '/' -f 2 <<< "$GITHUB_REPOSITORY")
-
-        echo "Sync with existing charts under gh-pages branch..."
-        mkdir -p .helm-release-packages/charts
-
-        gh_pages_worktree=$(mktemp -d)
-        git worktree add "$gh_pages_worktree" gh-pages
-        
-        if [[ ! -d "${gh_pages_worktree}/charts" ]]
-        then
-            mkdir -p ${gh_pages_worktree}/charts
-        else 
-            cp -r ${gh_pages_worktree}/charts/* .helm-release-packages/charts/
-        fi
-
-        echo "Packing current version helm charts..."
-        helm package ./deploy/charts/magda-ckan-connector --destination .helm-release-packages/charts --dependency-update --save=false
-        
-        echo "Re-Create helm repo index..."
-        helm repo index .helm-release-packages/charts --url https://${owner}.github.io/${repo}/charts
-        
-        echo "Commit helm charts to gh-pages branch..."
-        cp --force .helm-release-packages/charts/index.yaml ${gh_pages_worktree}/index.yaml
-        unlink .helm-release-packages/charts/index.yaml
-        cp --force -u .helm-release-packages/charts/* ${gh_pages_worktree}/charts/
-        pushd "$gh_pages_worktree" > /dev/null
-        git add --all
-        git commit --message="Update helm repo" --signoff
-        git push "https://x-access-token:$CR_TOKEN@github.com/$owner/$repo" gh-pages
-        popd > /dev/null
+        echo "Sync with existing charts repo in s3..."
+        mkdir -p chart-repo
+        aws s3 sync s3://magda-charts/ chart-repo
+        helm package ./deploy/charts/magda-ckan-connector -d chart-repo --save=false
+        helm repo index chart-repo
+        echo "Releasing charts to s3..."
+        aws s3 sync chart-repo s3://magda-charts/ --acl public-read
         
