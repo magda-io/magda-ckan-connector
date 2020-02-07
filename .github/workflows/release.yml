@@ -24,7 +24,7 @@ jobs:
       - name: helm-check
         uses: igabaydulin/helm-check-action@0.1.4
         env:
-          CHART_LOCATION: ./deploy/${REPO_NAME}
+          CHART_LOCATION: ${{ join('./deploy/', env.REPO_NAME) }}
           CHART_VALUES: ./deploy/test-deploy.yaml
 
       - name: Login to GitHub Package Repository
