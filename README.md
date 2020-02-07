@@ -11,16 +11,14 @@ Magda Ckan Connector is created for crawling data from Ckan data source.
 
 It's recommanded to deploy connectors with as [dependencies](https://helm.sh/docs/topics/chart_best_practices/dependencies/) of a Magda helm deployment. Example can be found from [here](https://github.com/magda-io/magda-config).
 
-- Helm Chart Repository Url: 
-
-https://magda-io.github.io/magda-ckan-connector
+- Magda Helm Charts Repository Url: https://charts.magda.io
 
 The [helm chart](https://helm.sh/docs/topics/charts/) for this connector is auto released when a [Github Release](https://help.github.com/en/github/administering-a-repository/creating-releases) is created for this repo. 
 
-- Add Repository:
+- Add repository to helm:
 
 ```bash
-helm repo add magda-ckan-connector https://magda-io.github.io/magda-ckan-connector
+helm repo add magda-io https://charts.magda.io
 ```
 
 ### Docker Image 
