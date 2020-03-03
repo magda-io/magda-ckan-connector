@@ -31,8 +31,8 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
-    "husky": "^3.1.0",
     "chai": "^4.2.0",
+    "husky": "^3.1.0",
     "mocha": "^7.0.1",
     "nock": "^11.7.2",
     "prettier": "^1.19.1",
@@ -50,6 +50,7 @@
     "@magda/utils": "^0.0.57-0",
     "body-parser": "^1.18.1",
     "express": "^4.15.4",
+    "get-stdin": "^7.0.0",
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.17.1",
     "read-pkg-up": "^3.0.0",
@@ -61,7 +62,7 @@
     "registryUrl": "http://localhost:6101/v0",
     "docker": {
       "name": "data61/magda-ckan-connector",
-      "include": "node_modules aspect-templates dist Dockerfile package.json"
+      "include": "node_modules aspect-templates dist Dockerfile package.json bootstrap.js"
     },
     "jwtSecret": "squirrel",
     "userId": "00000000-0000-4000-8000-000000000000"
