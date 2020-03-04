@@ -9,3 +9,6 @@ global:
 
 includeCronJobs: false
 includeInitialJobs: false
+
+openfaas:
+  functionNamespace: openfaas-fn

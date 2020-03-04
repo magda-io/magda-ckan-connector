@@ -1,0 +1,28 @@
+{{- if and .Values.openfaas .Values.openfaas.functionNamespace }}
+apiVersion: openfaas.com/v1
+kind: Function
+metadata:
+  name: ckan-data-url-processor
+  namespace: {{ .Values.openfaas.functionNamespace | default "openfaas-fn" }}
+  labels: 
+    category: connectors
+    sub-category: ckan-connector
+    type: data-url-processor
+spec:
+  name: nodeinfo
+  handler: node bootstrap.js
+  image: "{{ .Values.image.repository | default .Values.global.connectors.image.repository | default .Values.global.image.repository | default .Values.defaultImage.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag | default .Values.global.connectors.image.tag | default .Values.global.image.tag | default .Values.defaultImage.tag }}"
+  labels: 
+    category: connectors
+    sub-category: ckan-connector
+    type: data-url-processor
+  environment:
+    write_debug: "true"
+{{ .Values.resources | toYaml | indent 2 -}}
+  secrets:
+    - jwt-secret
+{{- $imagePullSecret := (ne (.Values.image.imagePullSecret | typeOf) "<nil>") | ternary .Values.image.imagePullSecret ( (ne (.Values.global.connectors.image.imagePullSecret | typeOf) "<nil>") | ternary .Values.global.connectors.image.imagePullSecret (  (ne (.Values.global.image.imagePullSecret | typeOf) "<nil>") | ternary .Values.global.image.imagePullSecret .Values.defaultImage.imagePullSecret )  ) -}}
+    {{- if ne ($imagePullSecret | toString) "false" }}
+    - {{ $imagePullSecret }}
+    {{- end }}
+{{- end }}
