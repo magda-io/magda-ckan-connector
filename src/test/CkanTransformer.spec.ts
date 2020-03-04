@@ -1,6 +1,19 @@
 import { expect } from "chai";
 import "mocha";
-import { transformer } from "../setup";
+import createTransformer from "../createTransformer";
+import { getArgv, builderOptions } from "../setup";
+
+const argv = getArgv();
+
+const transformerOptions = {
+    ...builderOptions,
+    id: argv.id,
+    name: argv.name,
+    sourceUrl: argv.sourceUrl,
+    tenantId: argv.tenantId
+};
+
+const transformer = createTransformer(transformerOptions);
 
 describe("CkanTransformer", () => {
     describe("organizationJsonToRecord", () => {
