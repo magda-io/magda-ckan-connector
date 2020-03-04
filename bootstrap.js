@@ -2,7 +2,7 @@
 
 const getStdin = require("get-stdin");
 
-const handler = require("./dist/index");
+const handlers = require("./dist/handlers");
 
 getStdin()
     .then(val => {
@@ -20,7 +20,28 @@ getStdin()
             }
         }; // cb ...
 
-        const result = handler(val, cb);
+        const data = JSON.parse(val);
+        if (!data) {
+            throw new Error("Invalid input data, require an object.");
+        }
+
+        let handler;
+
+        if (!data.handler) {
+            handler = handlers.default;
+        } else {
+            handler = handlers[data.handler];
+        }
+
+        if (typeof handler !== "function") {
+            throw new Error(
+                `Can't locate requested handler: ${
+                    data.handler ? data.handler : "default"
+                }`
+            );
+        }
+
+        const result = handler(data, cb);
         if (result instanceof Promise) {
             result
                 .then(data => cb(undefined, data))

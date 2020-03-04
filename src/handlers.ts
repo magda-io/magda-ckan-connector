@@ -4,11 +4,13 @@ import {
     AuthorizedRegistryClient as Registry
 } from "@magda/connector-sdk";
 import createTransformer from "./createTransformer";
-import { getArgv, builderOptions } from "./setup";
+import { builderOptions } from "./setup";
+import getSecret from "./getSecret";
 export { default as handlerRemoteDataUrl } from "./handlerRemoteDataUrl";
 
 async function defaultHandler(params: any) {
-    const argv = getArgv();
+    const argv = params;
+    argv.jwtSecret = getSecret("jwt-secret");
 
     const ckan = new Ckan({
         baseUrl: argv.sourceUrl,
