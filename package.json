@@ -48,6 +48,7 @@
     "@magda/connector-sdk": "^0.0.57-0",
     "@magda/registry-aspects": "^0.0.57-0",
     "@magda/utils": "^0.0.57-0",
+    "axios": "^0.19.2",
     "body-parser": "^1.18.1",
     "express": "^4.15.4",
     "get-stdin": "^7.0.0",

@@ -3,7 +3,10 @@ import {
     JsonConnector,
     AuthorizedRegistryClient as Registry
 } from "@magda/connector-sdk";
-import { argv, transformer, transformerOptions } from "./setup";
+import createTransformer from "./createTransformer";
+import { getArgv, builderOptions } from "./setup";
+
+const argv = getArgv();
 
 const ckan = new Ckan({
     baseUrl: argv.sourceUrl,
@@ -22,9 +25,17 @@ const registry = new Registry({
     tenantId: argv.tenantId
 });
 
+const transformerOptions = {
+    ...builderOptions,
+    id: argv.id,
+    name: argv.name,
+    sourceUrl: argv.sourceUrl,
+    tenantId: argv.tenantId
+};
+
 const connector = new JsonConnector({
     source: ckan,
-    transformer: transformer,
+    transformer: createTransformer(transformerOptions),
     registry: registry
 });
 
@@ -36,6 +47,6 @@ if (!argv.interactive) {
     connector.runInteractive({
         timeoutSeconds: argv.timeout,
         listenPort: argv.listenPort,
-        transformerOptions: transformerOptions
+        transformerOptions
     });
 }
