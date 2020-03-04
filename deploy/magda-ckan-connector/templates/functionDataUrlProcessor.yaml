@@ -9,7 +9,7 @@ metadata:
     sub-category: ckan-connector
     type: data-url-processor
 spec:
-  name: nodeinfo
+  name: ckan-data-url-processor
   handler: node bootstrap.js
   image: "{{ .Values.image.repository | default .Values.global.connectors.image.repository | default .Values.global.image.repository | default .Values.defaultImage.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag | default .Values.global.connectors.image.tag | default .Values.global.image.tag | default .Values.defaultImage.tag }}"
   labels: 
