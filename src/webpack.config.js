@@ -22,6 +22,7 @@ module.exports = {
                 loader: "ts-loader",
                 options: {
                     configFile,
+                    onlyCompileBundledFiles: true,
                     compilerOptions: {
                         lib: ["es5"]
                     }
