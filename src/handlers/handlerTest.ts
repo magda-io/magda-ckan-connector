@@ -1,3 +1,4 @@
+// --- a test function to test function handler invocation
 export default async function() {
-    console.log("test function!!!");
+    return new Date().toString() + " : test function complete!";
 }

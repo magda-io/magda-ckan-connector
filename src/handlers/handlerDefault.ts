@@ -4,7 +4,6 @@ import {
     AuthorizedRegistryClient as Registry
 } from "@magda/connector-sdk";
 import createTransformer from "../createTransformer";
-//const builderOptions = {} as any;
 import { builderOptions } from "../setup";
 import getSecret from "../getSecret";
 

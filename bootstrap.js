@@ -1,56 +1,116 @@
 "use strict";
 
-const getStdin = require("get-stdin");
-
+const express = require("express");
+const app = express();
 const handlers = require("./dist/handlers");
+const bodyParser = require("body-parser");
+
+const isArray = a => {
+    return !!a && a.constructor === Array;
+};
 
 const isObject = a => {
     return !!a && a.constructor === Object;
 };
 
-(async () => {
-    try {
-        const input = await getStdin();
-        const inputData = JSON.parse(input);
-        if (!inputData) {
-            throw new Error("Invalid input data, require an object.");
-        }
+if (process.env.RAW_BODY === "true") {
+    app.use(bodyParser.raw({ type: "*/*" }));
+} else {
+    var jsonLimit = process.env.MAX_JSON_SIZE || "100kb"; //body-parser default
+    app.use(bodyParser.json({ limit: jsonLimit }));
+    app.use(bodyParser.raw()); // "Content-Type: application/octet-stream"
+    app.use(bodyParser.text({ type: "text/*" }));
+}
 
-        // --- merge with env variables
-        const data = {
-            ...(process.env ? process.env : {}),
-            ...inputData
+app.disable("x-powered-by");
+
+function parseJson(str) {
+    try {
+        const data = JSON.parse(str);
+        return data;
+    } catch (e) {
+        return null;
+    }
+}
+
+const middleware = async (req, res) => {
+    try {
+        let inputData = {
+            req: {
+                body: req.body,
+                headers: req.headers,
+                method: req.method,
+                query: req.query,
+                path: req.path
+            },
+            ...(process.env ? process.env : {})
         };
+
+        // --- consolidate all input (including possible env vars)
+        if (req.body) {
+            if (typeof req.body === "string") {
+                const jsonData = parseJson(req.body);
+                if (isObject(inputData)) {
+                    inputData = {
+                        ...inputData,
+                        ...jsonData
+                    };
+                } else if (isArray(inputData)) {
+                    inputData.req.body = inputData;
+                }
+            } else if (isObject(req.body)) {
+                inputData = {
+                    ...inputData,
+                    ...req.body
+                };
+            }
+        }
 
         let handler;
 
-        if (!data.handler) {
+        if (!inputData.handler) {
             handler = handlers.default;
         } else {
-            handler = handlers[data.handler];
+            handler = handlers[inputData.handler];
         }
 
         if (typeof handler !== "function") {
             throw new Error(
                 `Can't locate requested handler: ${
-                    data.handler ? data.handler : "default"
+                    inputData.handler ? inputData.handler : "default"
                 }`
             );
         }
 
-        const result = await handler(data);
+        const result = await handler(inputData);
 
         if (Array.isArray(result) || isObject(result)) {
-            process.stdout.end(JSON.stringify(result), "utf8");
+            res.status(200).json(result);
         } else if (typeof result === "string") {
-            process.stdout.end(result, "utf8");
+            res.set("Content-Type", "text/plain");
+            res.status(200).send(result);
         } else {
-            process.stdout.end(" ", "utf8");
+            res.set("Content-Type", "text/plain");
+            if (typeof result === "undefined" || result === null) {
+                res.status(200).end();
+            } else {
+                res.status(200).send("" + result);
+            }
         }
-        process.stdout.destroy();
-        process.exit();
     } catch (e) {
-        process.stderr.end(JSON.stringify(e), "utf8");
-        process.exit(1);
+        console.error(e);
+        res.status(500).send(e);
     }
-})();
+};
+
+app.post("/*", middleware);
+app.get("/*", middleware);
+app.patch("/*", middleware);
+app.put("/*", middleware);
+app.delete("/*", middleware);
+
+const port = process.env.http_port || 3000;
+
+app.listen(port, () => {
+    console.log(`OpenFaaS Node.js listening on port: ${port}`);
+});
