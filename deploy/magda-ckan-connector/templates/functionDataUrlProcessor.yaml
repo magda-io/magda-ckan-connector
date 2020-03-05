@@ -5,19 +5,22 @@ metadata:
   name: ckan-data-url-processor
   namespace: {{ .Values.openfaas.functionNamespace | default "openfaas-fn" }}
   labels: 
-    category: connectors
-    sub-category: ckan-connector
-    type: data-url-processor
+    magda-category: connectors
+    magda-sub-category: ckan-connector
+    magda-type: data-url-processor
 spec:
   name: ckan-data-url-processor
   handler: node bootstrap.js
   image: "{{ .Values.image.repository | default .Values.global.connectors.image.repository | default .Values.global.image.repository | default .Values.defaultImage.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag | default .Values.global.connectors.image.tag | default .Values.global.image.tag | default .Values.defaultImage.tag }}"
   labels: 
-    category: connectors
-    sub-category: ckan-connector
-    type: data-url-processor
+    magda-category: connectors
+    magda-sub-category: ckan-connector
+    magda-type: data-url-processor
   environment:
-    write_debug: "true"
+    handler: remoteDataUrl
+    read_timeout: 65s
+    write_timeout: 65s
+    exec_timeout: 60s
     userId: 00000000-0000-4000-8000-000000000000
 {{ .Values.resources | toYaml | indent 2 -}}
   secrets:

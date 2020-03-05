@@ -99,7 +99,8 @@ const middleware = async (req, res) => {
         }
     } catch (e) {
         console.error(e);
-        res.status(500).send(e);
+        res.set("Content-Type", "text/plain");
+        res.status(500).send("" + e);
     }
 };
 
