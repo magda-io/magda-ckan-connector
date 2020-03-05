@@ -4,23 +4,14 @@ const getStdin = require("get-stdin");
 
 const handlers = require("./dist/handlers");
 
-getStdin()
-    .then(val => {
-        const cb = (err, res) => {
-            if (err) {
-                return console.error(err);
-            }
-            if (!res) {
-                return;
-            }
-            if (Array.isArray(res) || isObject(res)) {
-                process.stdout.write(JSON.stringify(res));
-            } else {
-                process.stdout.write(res);
-            }
-        }; // cb ...
+const isObject = a => {
+    return !!a && a.constructor === Object;
+};
 
-        const inputData = JSON.parse(val);
+(async () => {
+    try {
+        const input = await getStdin();
+        const inputData = JSON.parse(input);
         if (!inputData) {
             throw new Error("Invalid input data, require an object.");
         }
@@ -47,17 +38,14 @@ getStdin()
             );
         }
 
-        const result = handler(data, cb);
-        if (result instanceof Promise) {
-            result
-                .then(data => cb(undefined, data))
-                .catch(err => cb(err, undefined));
-        }
-    })
-    .catch(e => {
-        console.error(e.stack);
-    });
+        const result = await handler(data);
 
-const isObject = a => {
-    return !!a && a.constructor === Object;
-};
+        if (Array.isArray(result) || isObject(result)) {
+            process.stdout.write(JSON.stringify(result));
+        } else {
+            process.stdout.write(result);
+        }
+    } catch (e) {
+        console.error(e);
+    }
+})();
