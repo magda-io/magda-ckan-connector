@@ -23,6 +23,8 @@ defaultImage:
   pullPolicy: IfNotPresent
   imagePullSecret: false
 
+openfaas: {}
+
 resources:
   requests:
     cpu: 50m
