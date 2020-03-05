@@ -34,20 +34,21 @@ const REGEX_CKAN_SITE_DISTRIBUTION_URL = /\/dataset\/.+\/resource\/.+/i;
 async function handlerRemoteDataUrl(
     context: any
 ): Promise<RemoteDataHandlingResult> {
-    const params = context;
+    const remoteDataUrl =
+        typeof context === "string" ? context : context.remoteDataUrl;
 
-    if (!params.remoteDataUrl) {
+    if (!remoteDataUrl) {
         throw new Error("Can't locate remote data url parameter!");
     }
 
-    if (REGEX_CKAN_DATASET_API_URL.test(params.remoteDataUrl)) {
-        return await processDatasetAPIUrl(params.remoteDataUrl);
-    } else if (REGEX_CKAN_DISTRIBUTION_API_URL.test(params.remoteDataUrl)) {
-        return await processDistributionAPIUrl(params.remoteDataUrl);
-    } else if (REGEX_CKAN_SITE_DISTRIBUTION_URL.test(params.remoteDataUrl)) {
-        return await processDistributionWebUrl(params.remoteDataUrl);
-    } else if (REGEX_CKAN_SITE_DATASET_URL.test(params.remoteDataUrl)) {
-        return await processDatasetWebUrl(params.remoteDataUrl);
+    if (REGEX_CKAN_DATASET_API_URL.test(remoteDataUrl)) {
+        return await processDatasetAPIUrl(remoteDataUrl);
+    } else if (REGEX_CKAN_DISTRIBUTION_API_URL.test(remoteDataUrl)) {
+        return await processDistributionAPIUrl(remoteDataUrl);
+    } else if (REGEX_CKAN_SITE_DISTRIBUTION_URL.test(remoteDataUrl)) {
+        return await processDistributionWebUrl(remoteDataUrl);
+    } else if (REGEX_CKAN_SITE_DATASET_URL.test(remoteDataUrl)) {
+        return await processDatasetWebUrl(remoteDataUrl);
     } else {
         throw new Error("Not valid CKAN system URL.");
     }
