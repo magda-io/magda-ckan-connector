@@ -35,26 +35,6 @@ function getRndSegments() {
     return segments.length ? `/${segments.join("/")}` : "";
 }
 
-before(() => {
-    nock.disableNetConnect();
-
-    ckanServerScope = nock(CKAN_SERVER_BASE);
-    ckanServerScope.persist();
-
-    ckanServerScope
-        .get(uri => uri.includes("/api/3/action/package_show"))
-        .reply(200, sampleDatasetData);
-
-    ckanServerScope
-        .get(uri => uri.includes("/api/3/action/resource_show"))
-        .reply(200, sampleDistributionData);
-});
-
-after(() => {
-    nock.cleanAll();
-    nock.enableNetConnect();
-});
-
 function removeUnwantedFields(result: RemoteDataHandlingResult) {
     // --- remove url fields as we are testing random server urls
     delete result.dataset.aspects["dcat-dataset-strings"].landingPage;
@@ -71,6 +51,26 @@ function removeUnwantedFields(result: RemoteDataHandlingResult) {
 }
 
 describe("handlerRemoteDataUrl", () => {
+    before(() => {
+        nock.disableNetConnect();
+
+        ckanServerScope = nock(CKAN_SERVER_BASE);
+        ckanServerScope.persist();
+
+        ckanServerScope
+            .get(uri => uri.includes("/api/3/action/package_show"))
+            .reply(200, sampleDatasetData);
+
+        ckanServerScope
+            .get(uri => uri.includes("/api/3/action/resource_show"))
+            .reply(200, sampleDistributionData);
+    });
+
+    after(() => {
+        nock.cleanAll();
+        nock.enableNetConnect();
+    });
+
     it("should process ckan dataset web url and return correct data", async () => {
         const result = await handlerRemoteDataUrl({
             remoteDataUrl: `https://example.com${getRndSegments()}/dataset/${getRndString(

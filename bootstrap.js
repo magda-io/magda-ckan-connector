@@ -14,7 +14,7 @@ getStdin()
                 return;
             }
             if (Array.isArray(res) || isObject(res)) {
-                console.log(JSON.stringify(res));
+                process.stdout.write(JSON.stringify(res));
             } else {
                 process.stdout.write(res);
             }
