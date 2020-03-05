@@ -4,7 +4,7 @@ import nock from "nock";
 import randomstring from "randomstring";
 import handlerRemoteDataUrl, {
     RemoteDataHandlingResult
-} from "../handlerRemoteDataUrl";
+} from "../handlers/handlerRemoteDataUrl";
 import sampleDatasetData from "./ckan-server-dataset-sample-response.json";
 import sampleDistributionData from "./ckan-server-distribution-sample-response.json";
 import sampleDatasetDataUrlResult from "./dataset-data-url-result.json";

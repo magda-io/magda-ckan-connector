@@ -1,10 +1,10 @@
-import Ckan from "./Ckan";
-import { builderOptions } from "./setup";
+import Ckan from "../Ckan";
+import { builderOptions } from "../setup";
 import URI from "urijs";
 import { forEachAsync } from "@magda/utils";
 import { Record } from "@magda/connector-sdk";
 import axios from "axios";
-import createTransformerFromOption from "./createTransformer";
+import createTransformerFromOption from "../createTransformer";
 
 export type RemoteDataHandlingResult = {
     dataset: Record;
@@ -31,7 +31,7 @@ const REGEX_CKAN_SITE_DISTRIBUTION_URL = /\/dataset\/.+\/resource\/.+/i;
  * @param {*} params
  * @returns {Promise<RemoteDataHandlingResult>}
  */
-async function remoteDataUrlHandler(
+async function handlerRemoteDataUrl(
     context: any
 ): Promise<RemoteDataHandlingResult> {
     const params = context;
@@ -261,4 +261,4 @@ async function processDistributionWebUrl(
     return result;
 }
 
-export default remoteDataUrlHandler;
+export default handlerRemoteDataUrl;

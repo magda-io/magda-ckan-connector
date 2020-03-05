@@ -1,14 +1,14 @@
-import Ckan from "./Ckan";
+import Ckan from "../Ckan";
 import {
     JsonConnector,
     AuthorizedRegistryClient as Registry
 } from "@magda/connector-sdk";
-import createTransformer from "./createTransformer";
-import { builderOptions } from "./setup";
-import getSecret from "./getSecret";
-export { default as handlerRemoteDataUrl } from "./handlerRemoteDataUrl";
+import createTransformer from "../createTransformer";
+//const builderOptions = {} as any;
+import { builderOptions } from "../setup";
+import getSecret from "../getSecret";
 
-async function defaultHandler(context: any) {
+async function handlerDefault(context: any) {
     const argv = context;
     argv.jwtSecret = getSecret("jwt-secret");
 
@@ -48,4 +48,4 @@ async function defaultHandler(context: any) {
     });
 }
 
-export default defaultHandler;
+export default handlerDefault;

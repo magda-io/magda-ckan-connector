@@ -41,11 +41,16 @@ const isObject = a => {
         const result = await handler(data);
 
         if (Array.isArray(result) || isObject(result)) {
-            process.stdout.write(JSON.stringify(result));
+            process.stdout.end(JSON.stringify(result), "utf8");
+        } else if (typeof result === "string") {
+            process.stdout.end(result, "utf8");
         } else {
-            process.stdout.write(result);
+            process.stdout.end(" ", "utf8");
         }
+        process.stdout.destroy();
+        process.exit();
     } catch (e) {
-        console.error(e);
+        process.stderr.end(JSON.stringify(e), "utf8");
+        process.exit(1);
     }
 })();
