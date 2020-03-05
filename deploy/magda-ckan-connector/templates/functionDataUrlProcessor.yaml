@@ -25,8 +25,3 @@ spec:
 {{ .Values.resources | toYaml | indent 2 -}}
   secrets:
     - jwt-secret
-{{- $imagePullSecret := (ne (.Values.image.imagePullSecret | typeOf) "<nil>") | ternary .Values.image.imagePullSecret ( (ne (.Values.global.connectors.image.imagePullSecret | typeOf) "<nil>") | ternary .Values.global.connectors.image.imagePullSecret (  (ne (.Values.global.image.imagePullSecret | typeOf) "<nil>") | ternary .Values.global.image.imagePullSecret .Values.defaultImage.imagePullSecret )  ) -}}
-    {{- if ne ($imagePullSecret | toString) "false" }}
-    - {{ $imagePullSecret }}
-    {{- end }}
-{{- end }}
