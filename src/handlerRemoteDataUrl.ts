@@ -6,7 +6,7 @@ import { Record } from "@magda/connector-sdk";
 import axios from "axios";
 import createTransformerFromOption from "./createTransformer";
 
-type RemoteDataHandlingResult = {
+export type RemoteDataHandlingResult = {
     dataset: Record;
     distributions: Record[];
 };
@@ -122,7 +122,7 @@ async function processDatasetAPIUrl(
     const source = createSource(url);
     const transformer = createTransformer(url);
 
-    const datasetJson = source.getJsonDataset(datasetId);
+    const datasetJson = await source.getJsonDataset(datasetId);
     const datasetData = transformer.datasetJsonToRecord(datasetJson);
     const result: RemoteDataHandlingResult = {
         dataset: datasetData,
@@ -168,7 +168,7 @@ async function processDistributionAPIUrl(
     }
 
     const datasetId = res.data.result.package_id;
-    const datasetJson = source.getJsonDataset(datasetId);
+    const datasetJson = await source.getJsonDataset(datasetId);
     const datasetData = transformer.datasetJsonToRecord(datasetJson);
     const distributionData = transformer.distributionJsonToRecord(
         res.data.result,
@@ -192,7 +192,7 @@ async function processDatasetWebUrl(
     const source = createSource(url);
     const transformer = createTransformer(url);
 
-    const datasetJson = source.getJsonDataset(datasetId);
+    const datasetJson = await source.getJsonDataset(datasetId);
     const datasetData = transformer.datasetJsonToRecord(datasetJson);
     const result: RemoteDataHandlingResult = {
         dataset: datasetData,
@@ -222,7 +222,7 @@ async function processDistributionWebUrl(
     const source = createSource(url);
     const transformer = createTransformer(url);
 
-    const datasetJson = source.getJsonDataset(datasetId);
+    const datasetJson = await source.getJsonDataset(datasetId);
     const datasetData = transformer.datasetJsonToRecord(datasetJson);
     const result: RemoteDataHandlingResult = {
         dataset: datasetData,
