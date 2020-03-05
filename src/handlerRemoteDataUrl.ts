@@ -32,8 +32,10 @@ const REGEX_CKAN_SITE_DISTRIBUTION_URL = /\/dataset\/.+\/resource\/.+/i;
  * @returns {Promise<RemoteDataHandlingResult>}
  */
 async function remoteDataUrlHandler(
-    params: any
+    context: any
 ): Promise<RemoteDataHandlingResult> {
+    const params = context;
+
     if (!params.remoteDataUrl) {
         throw new Error("Can't locate remote data url parameter!");
     }

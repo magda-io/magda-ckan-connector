@@ -8,8 +8,8 @@ import { builderOptions } from "./setup";
 import getSecret from "./getSecret";
 export { default as handlerRemoteDataUrl } from "./handlerRemoteDataUrl";
 
-async function defaultHandler(params: any) {
-    const argv = params;
+async function defaultHandler(context: any) {
+    const argv = context;
     argv.jwtSecret = getSecret("jwt-secret");
 
     const ckan = new Ckan({

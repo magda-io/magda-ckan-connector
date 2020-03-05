@@ -20,10 +20,16 @@ getStdin()
             }
         }; // cb ...
 
-        const data = JSON.parse(val);
-        if (!data) {
+        const inputData = JSON.parse(val);
+        if (!inputData) {
             throw new Error("Invalid input data, require an object.");
         }
+
+        // --- merge with env variables
+        const data = {
+            ...(process.env ? process.env : {}),
+            ...inputData
+        };
 
         let handler;
 
