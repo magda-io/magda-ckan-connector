@@ -35,7 +35,9 @@ async function handlerRemoteDataUrl(
     context: any
 ): Promise<RemoteDataHandlingResult> {
     const remoteDataUrl =
-        typeof context === "string" ? context : context.remoteDataUrl;
+        typeof context.req.body === "string" && !context.remoteDataUrl
+            ? context.req.body
+            : context.remoteDataUrl;
 
     if (!remoteDataUrl) {
         throw new Error("Can't locate remote data url parameter!");

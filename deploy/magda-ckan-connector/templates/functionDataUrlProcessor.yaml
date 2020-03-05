@@ -25,3 +25,4 @@ spec:
 {{ .Values.resources | toYaml | indent 2 -}}
   secrets:
     - jwt-secret
+{{- end }}
