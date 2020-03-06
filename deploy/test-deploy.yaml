@@ -6,9 +6,8 @@ global:
   connectors:
     includeCronJobs: true
     includeInitialJobs: true
+  openfaas:
+    functionNamespace: openfaas-fn
 
-includeCronJobs: false
-includeInitialJobs: false
-
-openfaas:
-  functionNamespace: openfaas-fn
+includeCronJobs: true
+includeInitialJobs: true

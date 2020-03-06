@@ -2,6 +2,7 @@ global:
   image: {}
   connectors:
     image: {}
+  openfaas: {}
 
 # image setting loadding order: (from higher priority to lower priority)
 # - Values.image.x
