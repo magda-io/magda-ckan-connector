@@ -1,9 +1,9 @@
-{{- if and .Values.openfaas .Values.openfaas.functionNamespace }}
+{{- if and .Values.global.openfaas .Values.global.openfaas.functionNamespace }}
 apiVersion: openfaas.com/v1
 kind: Function
 metadata:
   name: ckan-data-url-processor
-  namespace: {{ .Values.openfaas.functionNamespace | default "openfaas-fn" }}
+  namespace: {{ .Values.global.openfaas.functionNamespace | default "openfaas-fn" }}
   labels: 
     magdaCategory: connectors
     magdaSubCategory: ckan-connector
