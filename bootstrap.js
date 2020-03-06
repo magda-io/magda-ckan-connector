@@ -49,7 +49,8 @@ const middleware = async (req, res) => {
         // --- consolidate all input (including possible env vars)
         if (req.body) {
             if (typeof req.body === "string") {
-                const jsonData = parseJson(req.body);
+                // --- faas-cli has a bug could introduce an extra newline to the input T_T
+                const jsonData = parseJson(req.body.trim());
                 if (isObject(inputData)) {
                     inputData = {
                         ...inputData,
@@ -100,7 +101,11 @@ const middleware = async (req, res) => {
     } catch (e) {
         console.error(e);
         res.set("Content-Type", "text/plain");
-        res.status(500).send("" + e);
+        if (e.stack) {
+            res.status(500).send("" + e.stack);
+        } else {
+            res.status(500).send("" + e);
+        }
     }
 };
 

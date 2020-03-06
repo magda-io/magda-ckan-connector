@@ -34,14 +34,16 @@ const REGEX_CKAN_SITE_DISTRIBUTION_URL = /\/dataset\/.+\/resource\/.+/i;
 async function handlerRemoteDataUrl(
     context: any
 ): Promise<RemoteDataHandlingResult> {
-    const remoteDataUrl =
+    let remoteDataUrl =
         typeof context.req.body === "string" && !context.remoteDataUrl
             ? context.req.body
             : context.remoteDataUrl;
 
-    if (!remoteDataUrl) {
-        throw new Error("Can't locate remote data url parameter!");
+    if (!remoteDataUrl || typeof remoteDataUrl !== "string") {
+        throw new Error("Can't locate remote data url!");
     }
+
+    remoteDataUrl = remoteDataUrl.trim();
 
     if (REGEX_CKAN_DATASET_API_URL.test(remoteDataUrl)) {
         return await processDatasetAPIUrl(remoteDataUrl);

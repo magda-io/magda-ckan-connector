@@ -77,7 +77,8 @@ describe("handlerRemoteDataUrl", () => {
                 ID_OR_NAME_CHARS,
                 16
             )}`,
-            handler: "handlerRemoteDataUrl"
+            handler: "handlerRemoteDataUrl",
+            req: {}
         });
 
         // --- this will strip any undefined fields during the json un/serialization
@@ -96,7 +97,8 @@ describe("handlerRemoteDataUrl", () => {
                 ID_OR_NAME_CHARS,
                 16
             )}/resource/${getRndString(ID_OR_NAME_CHARS, 16)}`,
-            handler: "handlerRemoteDataUrl"
+            handler: "handlerRemoteDataUrl",
+            req: {}
         });
 
         // --- this will strip any undefined fields during the json un/serialization
@@ -115,7 +117,8 @@ describe("handlerRemoteDataUrl", () => {
                 ID_OR_NAME_CHARS,
                 16
             )}`,
-            handler: "handlerRemoteDataUrl"
+            handler: "handlerRemoteDataUrl",
+            req: {}
         });
 
         // --- this will strip any undefined fields during the json un/serialization
@@ -134,7 +137,8 @@ describe("handlerRemoteDataUrl", () => {
                 ID_OR_NAME_CHARS,
                 16
             )}`,
-            handler: "handlerRemoteDataUrl"
+            handler: "handlerRemoteDataUrl",
+            req: {}
         });
 
         // --- this will strip any undefined fields during the json un/serialization
@@ -143,6 +147,27 @@ describe("handlerRemoteDataUrl", () => {
         expect(removeUnwantedFields(testData)).to.deep.equal(
             removeUnwantedFields(
                 sampleDistributionDataUrlResult as RemoteDataHandlingResult
+            )
+        );
+    });
+
+    it("should process ckan dataset web url from req.body and return correct data", async () => {
+        const result = await handlerRemoteDataUrl({
+            req: {
+                body: `https://example.com${getRndSegments()}/dataset/${getRndString(
+                    ID_OR_NAME_CHARS,
+                    16
+                )}`
+            },
+            handler: "handlerRemoteDataUrl"
+        });
+
+        // --- this will strip any undefined fields during the json un/serialization
+        const testData = JSON.parse(JSON.stringify(result));
+
+        expect(removeUnwantedFields(testData)).to.deep.equal(
+            removeUnwantedFields(
+                sampleDatasetDataUrlResult as RemoteDataHandlingResult
             )
         );
     });
