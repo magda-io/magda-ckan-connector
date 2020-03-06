@@ -1,7 +1,7 @@
 {
   "name": "@magda/ckan-connector",
   "description": "MAGDA CKAN Connector",
-  "version": "0.0.57-0",
+  "version": "0.0.57-0-openfaas",
   "scripts": {
     "prebuild": "rimraf dist tsconfig.tsbuildinfo",
     "build": "yarn run compile",
