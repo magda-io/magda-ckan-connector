@@ -20,7 +20,7 @@ image:
 
 defaultImage:
   repository: docker.io/data61
-  tag: 0.0.57-0
+  tag: 0.0.57-0-openfaas
   pullPolicy: IfNotPresent
   imagePullSecret: false
 
