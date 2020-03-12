@@ -109,6 +109,9 @@ const middleware = async (req, res) => {
     }
 };
 
+app.get("/healthz", (req, res) => {
+    res.status(200).send("OK");
+});
 app.post("/*", middleware);
 app.get("/*", middleware);
 app.patch("/*", middleware);

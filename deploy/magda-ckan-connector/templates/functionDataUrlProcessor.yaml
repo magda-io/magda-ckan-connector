@@ -16,6 +16,10 @@ spec:
     magdaCategory: connectors
     magdaSubCategory: ckan-connector
     magdaType: data-url-processor
+    com.openfaas.scale.zero: "true"
+  annotations:
+    com.openfaas.health.http.path: "/healthz"
+    com.openfaas.health.http.initialDelay: "10s"
   environment:
     handler: remoteDataUrl
     read_timeout: 65s
