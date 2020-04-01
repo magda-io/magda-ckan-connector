@@ -15,7 +15,19 @@
                 "ts-node/register",
                 "--require",
                 "tsconfig-paths/register",
-                "src/test/**/*.spec.ts"
+                "src/test/**/*.spec.ts",
+                "--userId",
+                "dummy",
+                "--jwtSecret",
+                "dummy",
+                "--sourceUrl",
+                "dummy",
+                "--tenantId",
+                "1",
+                "--id",
+                "test",
+                "--name",
+                "test"
             ]
         }
     ]

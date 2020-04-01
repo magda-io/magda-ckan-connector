@@ -54,11 +54,11 @@ async function loadAspectBuilderFiles(
         }
 
         if (ab.builderFunctionString) {
-            textFileResult[ab.builderFunctionString];
+            ab.builderFunctionString = textFileResult[ab.builderFunctionString];
         }
 
         if (ab.setupFunctionString) {
-            textFileResult[ab.setupFunctionString];
+            ab.setupFunctionString = textFileResult[ab.setupFunctionString];
         }
     });
 

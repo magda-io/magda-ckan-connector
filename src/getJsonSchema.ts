@@ -21,11 +21,11 @@ const filePromiseList: {
 
 function resolveSchemaDir(): Promise<string> {
     return new Promise((resolve, reject) => {
-        resolvePkg("@magda/registry-aspects/", (err, res) => {
+        resolvePkg("@magda/registry-aspects/package.json", (err, res) => {
             if (err) {
                 reject(err);
             } else {
-                resolve(res);
+                resolve(path.dirname(res));
             }
         });
     });
@@ -39,7 +39,7 @@ async function loadAllJsonSchemaFiles(dirPath: string): Promise<PlainObject> {
     const fileList: string[] = (
         await Promise.all(
             dirList
-                .filter(p => path.extname(p).toLowerCase() === "json")
+                .filter(p => path.extname(p).toLowerCase() === ".json")
                 .map(async p => {
                     const state = await fse.lstat(p);
                     if (state.isDirectory()) {
@@ -76,7 +76,7 @@ async function schemaNameToPromise(
     let fileName = schemaName;
     const ext = path.extname(fileName);
 
-    if (!ext || ext.toLowerCase() !== "json") {
+    if (!ext || ext.toLowerCase() !== ".json") {
         fileName = fileName + ".json";
     }
 
