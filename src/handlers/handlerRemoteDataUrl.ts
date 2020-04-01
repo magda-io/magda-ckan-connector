@@ -1,5 +1,5 @@
 import Ckan from "../Ckan";
-import { builderOptions } from "../setup";
+import createBuilderOptions from "../createBuilderOptions";
 import URI from "urijs";
 import { forEachAsync } from "@magda/utils";
 import { Record } from "@magda/connector-sdk";
@@ -101,12 +101,12 @@ function createSource(url: string) {
     });
 }
 
-function createTransformer(url: string) {
+async function createTransformer(url: string) {
     const host = getHost(url);
     const baseUrl = getBaseUrl(url);
 
     const transformerOptions = {
-        ...builderOptions,
+        ...(await createBuilderOptions()),
         id: host,
         name: host,
         sourceUrl: baseUrl,
@@ -127,7 +127,7 @@ async function processDatasetAPIUrl(
     }
 
     const source = createSource(url);
-    const transformer = createTransformer(url);
+    const transformer = await createTransformer(url);
 
     const datasetJson = await source.getJsonDataset(datasetId);
     const datasetData = transformer.datasetJsonToRecord(datasetJson);
@@ -159,7 +159,7 @@ async function processDistributionAPIUrl(
     }
 
     const source = createSource(url);
-    const transformer = createTransformer(url);
+    const transformer = await createTransformer(url);
 
     const res = await axios.get(url);
     if (res.status !== 200) {
@@ -197,7 +197,7 @@ async function processDatasetWebUrl(
     const datasetId = segments[segments.indexOf("dataset") + 1];
 
     const source = createSource(url);
-    const transformer = createTransformer(url);
+    const transformer = await createTransformer(url);
 
     const datasetJson = await source.getJsonDataset(datasetId);
     const datasetData = transformer.datasetJsonToRecord(datasetJson);
@@ -227,7 +227,7 @@ async function processDistributionWebUrl(
     const distributionId = segments[segments.indexOf("resource") + 1];
 
     const source = createSource(url);
-    const transformer = createTransformer(url);
+    const transformer = await createTransformer(url);
 
     const datasetJson = await source.getJsonDataset(datasetId);
     const datasetData = transformer.datasetJsonToRecord(datasetJson);

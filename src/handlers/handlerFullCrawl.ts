@@ -4,7 +4,7 @@ import {
     AuthorizedRegistryClient as Registry
 } from "@magda/connector-sdk";
 import createTransformer from "../createTransformer";
-import { builderOptions } from "../setup";
+import createBuilderOptions from "../createBuilderOptions";
 import getSecret from "../getSecret";
 
 async function handlerDefault(context: any) {
@@ -29,7 +29,7 @@ async function handlerDefault(context: any) {
     });
 
     const transformerOptions = {
-        ...builderOptions,
+        ...(await createBuilderOptions()),
         id: argv.id,
         name: argv.name,
         sourceUrl: argv.sourceUrl,
