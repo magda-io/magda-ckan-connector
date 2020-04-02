@@ -1,10 +1,26 @@
 import { expect } from "chai";
 import "mocha";
-import { transformer } from "../setup";
+import createTransformer from "../createTransformer";
+import { getArgv } from "../setup";
+import createBuilderOptions from "../createBuilderOptions";
+
+const argv = getArgv();
+
+async function getTransformer() {
+    const transformerOptions = {
+        ...(await createBuilderOptions()),
+        id: argv.id,
+        name: argv.name,
+        sourceUrl: argv.sourceUrl,
+        tenantId: argv.tenantId
+    };
+
+    return createTransformer(transformerOptions);
+}
 
 describe("CkanTransformer", () => {
     describe("organizationJsonToRecord", () => {
-        it("should not record the default description", () => {
+        it("should not record the default description", async () => {
             const organization = JSON.parse(
                 `{
                     "description": "A little information about my organization...",
@@ -12,6 +28,8 @@ describe("CkanTransformer", () => {
                     "name": "abc"
                 }`
             );
+
+            const transformer = await getTransformer();
             const theRecord = transformer.organizationJsonToRecord(
                 organization
             );
@@ -24,7 +42,7 @@ describe("CkanTransformer", () => {
             expect(organizationDetailsAspect.name).to.equal("abc");
         });
 
-        it("should not revise the non-default description", () => {
+        it("should not revise the non-default description", async () => {
             const organization = JSON.parse(
                 `{
                     "description": "This description should be kept.",
@@ -32,6 +50,8 @@ describe("CkanTransformer", () => {
                     "name": "def"
                 }`
             );
+
+            const transformer = await getTransformer();
             const theRecord = transformer.organizationJsonToRecord(
                 organization
             );

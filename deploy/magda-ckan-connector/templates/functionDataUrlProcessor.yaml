@@ -1,0 +1,30 @@
+{{- if and .Values.global.openfaas .Values.global.openfaas.functionNamespace .Values.createFunction }}
+apiVersion: openfaas.com/v1
+kind: Function
+metadata:
+  name: ckan-data-url-processor
+  namespace: {{ include "magda-ckan-connector.openfaaFunctionNamespace" . | quote }}
+  labels: 
+    magdaCategory: connectors
+    magdaSubCategory: ckan-connector
+    magdaType: data-url-processor
+spec:
+  name: ckan-data-url-processor
+  handler: node bootstrap.js
+  image: "{{ .Values.image.repository | default .Values.global.connectors.image.repository | default .Values.global.image.repository | default .Values.defaultImage.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag | default .Values.global.connectors.image.tag | default .Values.global.image.tag | default .Values.defaultImage.tag }}"
+  labels: 
+    magdaCategory: connectors
+    magdaSubCategory: ckan-connector
+    magdaType: data-url-processor
+    com.openfaas.scale.zero: "true"
+  annotations:
+    com.openfaas.health.http.path: "/healthz"
+    com.openfaas.health.http.initialDelay: "10s"
+  environment:
+    handler: remoteDataUrl
+    read_timeout: 65s
+    write_timeout: 65s
+    exec_timeout: 60s
+    userId: 00000000-0000-4000-8000-000000000000
+{{ .Values.resources | toYaml | indent 2 -}}
+{{- end }}

@@ -2,6 +2,7 @@ global:
   image: {}
   connectors:
     image: {}
+  openfaas: {}
 
 # image setting loadding order: (from higher priority to lower priority)
 # - Values.image.x
@@ -19,9 +20,12 @@ image:
 
 defaultImage:
   repository: docker.io/data61
-  tag: 0.0.57-0
+  tag: 0.0.57-0-openfaas
   pullPolicy: IfNotPresent
   imagePullSecret: false
+
+createFunction: false
+createConfigMap: true
 
 resources:
   requests:

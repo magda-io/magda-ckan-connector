@@ -1,14 +1,15 @@
-import Ckan from "./Ckan";
+import Ckan from "../Ckan";
 import {
     JsonConnector,
     AuthorizedRegistryClient as Registry
 } from "@magda/connector-sdk";
-import createTransformer from "./createTransformer";
-import { getArgv } from "./setup";
-import createBuilderOptions from "./createBuilderOptions";
+import createTransformer from "../createTransformer";
+import createBuilderOptions from "../createBuilderOptions";
+import getSecret from "../getSecret";
 
-(async () => {
-    const argv = getArgv();
+async function handlerDefault(context: any) {
+    const argv = context;
+    argv.jwtSecret = getSecret("jwt-secret");
 
     const ckan = new Ckan({
         baseUrl: argv.sourceUrl,
@@ -41,18 +42,9 @@ import createBuilderOptions from "./createBuilderOptions";
         registry: registry
     });
 
-    if (!argv.interactive) {
-        connector.run().then(result => {
-            console.log(result.summarize());
-        });
-    } else {
-        connector.runInteractive({
-            timeoutSeconds: argv.timeout,
-            listenPort: argv.listenPort,
-            transformerOptions
-        });
-    }
-})().catch(e => {
-    console.error(e);
-    process.exit(1);
-});
+    return connector.run().then(result => {
+        return result.summarize();
+    });
+}
+
+export default handlerDefault;

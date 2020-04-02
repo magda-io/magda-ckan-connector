@@ -1,0 +1,210 @@
+{
+    "dataset": {
+        "id": "ds-example.com-6633bb2c-8f85-4ac6-8c9b-c4ab740e1595",
+        "name": "Nombres masculinos más frecuentes en la provincia de Barcelona",
+        "aspects": {
+            "ckan-dataset": {
+                "license_title": "Other (Open)",
+                "maintainer": "",
+                "relationships_as_object": [],
+                "private": false,
+                "maintainer_email": "",
+                "num_tags": 6,
+                "id": "6633bb2c-8f85-4ac6-8c9b-c4ab740e1595",
+                "metadata_created": "2020-03-02T08:47:17.995815",
+                "metadata_modified": "2020-03-03T14:04:57.436723",
+                "author": "INE",
+                "author_email": "",
+                "state": "active",
+                "version": "",
+                "creator_user_id": "70179d93-ca00-491b-a5da-08f88b95dd16",
+                "type": "dataset",
+                "num_resources": 2,
+                "tags": [
+                    {
+                        "vocabulary_id": null,
+                        "state": "active",
+                        "display_name": "estadística",
+                        "id": "aa1a52fa-c6b3-4d3a-9bfb-adf24610d3a5",
+                        "name": "estadística"
+                    },
+                    {
+                        "vocabulary_id": null,
+                        "state": "active",
+                        "display_name": "ine",
+                        "id": "5cc81683-e411-4440-8751-68bce6d72adb",
+                        "name": "ine"
+                    },
+                    {
+                        "vocabulary_id": null,
+                        "state": "active",
+                        "display_name": "nombres",
+                        "id": "7f73de59-fc7a-4b4c-a40d-cd5b0c6e225c",
+                        "name": "nombres"
+                    },
+                    {
+                        "vocabulary_id": null,
+                        "state": "active",
+                        "display_name": "padrón",
+                        "id": "6d2c64b9-6581-491a-b378-742419069dc3",
+                        "name": "padrón"
+                    },
+                    {
+                        "vocabulary_id": null,
+                        "state": "active",
+                        "display_name": "población",
+                        "id": "dc9627fb-a113-4e7f-b035-29d0eab05b3b",
+                        "name": "población"
+                    },
+                    {
+                        "vocabulary_id": null,
+                        "state": "active",
+                        "display_name": "provincias",
+                        "id": "bf896e6e-be42-439c-9395-140c51ce9cd6",
+                        "name": "provincias"
+                    }
+                ],
+                "groups": [],
+                "license_id": "other-open",
+                "relationships_as_subject": [],
+                "organization": {
+                    "description": "La meva organització difon dades d'interés general europees relacionades amb la població, l'economia, el transport, etc...",
+                    "created": "2020-03-01T17:22:56.052633",
+                    "title": "EURODATA_Galdric",
+                    "name": "eurodata_galdric",
+                    "is_organization": true,
+                    "state": "active",
+                    "image_url": "2020-03-01-173645.939403Captura-de-pantalla-2020-03-01-a-les-18.36.08.png",
+                    "revision_id": "d5e4f89d-d578-4a6e-a3be-bd554b831abd",
+                    "type": "organization",
+                    "id": "f21204ee-27f3-43db-ba13-27fd91286feb",
+                    "approval_status": "approved"
+                },
+                "name": "nombres-masculinos-mas-frecuentes-en-la-provincia-de-barcelona",
+                "isopen": true,
+                "url": "http://www.ine.es/tnombres/inicio.do",
+                "notes": "Nombres más frecuentes es una aplicación desarrollada por el Instituto Nacional de Estadística (INE). Está basada en la Estadística del Padrón Continuo y permite elegir un nombre y ver cuántas personas tienen ese nombre, su edad media,  provincia de residencia, década de nacimiento y país de nacionalidad.",
+                "owner_org": "f21204ee-27f3-43db-ba13-27fd91286feb",
+                "extras": [
+                    {
+                        "key": "URL",
+                        "value": "https://www.ine.es/tnombres/formGeneralresult.do?vista=1"
+                    }
+                ],
+                "title": "Nombres masculinos más frecuentes en la provincia de Barcelona",
+                "revision_id": "58b1e592-4a25-41d7-b5c6-45e33db03e4c"
+            },
+            "dcat-dataset-strings": {
+                "title": "Nombres masculinos más frecuentes en la provincia de Barcelona",
+                "description": "Nombres más frecuentes es una aplicación desarrollada por el Instituto Nacional de Estadística (INE). Está basada en la Estadística del Padrón Continuo y permite elegir un nombre y ver cuántas personas tienen ese nombre, su edad media,  provincia de residencia, década de nacimiento y país de nacionalidad.",
+                "issued": "2020-03-02T08:47:17Z",
+                "modified": "2020-03-03T14:04:57Z",
+                "languages": [],
+                "publisher": "EURODATA_Galdric",
+                "temporal": {},
+                "themes": [],
+                "keywords": [
+                    "estadística",
+                    "ine",
+                    "nombres",
+                    "padrón",
+                    "población",
+                    "provincias"
+                ],
+                "landingPage": "https://example.com/p9l1d/2o289/f3yj9/8m05u/k61qv/xnpx9/0pbtw/ny3fe/dataset/6633bb2c-8f85-4ac6-8c9b-c4ab740e1595"
+            },
+            "source": {
+                "type": "ckan-dataset",
+                "url": "https://example.com/p9l1d/2o289/f3yj9/8m05u/k61qv/xnpx9/0pbtw/ny3fe/api/3/action/package_show?id=6633bb2c-8f85-4ac6-8c9b-c4ab740e1595",
+                "id": "example.com",
+                "name": "example.com"
+            }
+        }
+    },
+    "distributions": [
+        {
+            "id": "dist-example.com-a6a23cd9-f2b7-4ed2-a4b8-a7ab593b01d7",
+            "name": "Nombres masculinos más frecuentes en la provincia de Barcelona",
+            "aspects": {
+                "ckan-resource": {
+                    "mimetype": null,
+                    "cache_url": null,
+                    "hash": "",
+                    "description": "This is test resource one",
+                    "name": "Nombres masculinos más frecuentes en la provincia de Barcelona",
+                    "format": "XLS",
+                    "url": "https://demo.ckan.org/dataset/6633bb2c-8f85-4ac6-8c9b-c4ab740e1595/resource/a6a23cd9-f2b7-4ed2-a4b8-a7ab593b01d7/download/tnombres-2120093819.xls",
+                    "datastore_active": true,
+                    "cache_last_updated": null,
+                    "package_id": "6633bb2c-8f85-4ac6-8c9b-c4ab740e1595",
+                    "created": "2020-03-02T08:48:29.227790",
+                    "state": "active",
+                    "mimetype_inner": null,
+                    "last_modified": null,
+                    "position": 0,
+                    "revision_id": "58b1e592-4a25-41d7-b5c6-45e33db03e4c",
+                    "url_type": "upload",
+                    "id": "a6a23cd9-f2b7-4ed2-a4b8-a7ab593b01d7",
+                    "resource_type": null,
+                    "size": null
+                },
+                "dcat-distribution-strings": {
+                    "title": "Nombres masculinos más frecuentes en la provincia de Barcelona",
+                    "description": "This is test resource one",
+                    "issued": "2020-03-02T08:48:29Z",
+                    "license": "Other (Open)",
+                    "downloadURL": "https://demo.ckan.org/dataset/6633bb2c-8f85-4ac6-8c9b-c4ab740e1595/resource/a6a23cd9-f2b7-4ed2-a4b8-a7ab593b01d7/download/tnombres-2120093819.xls",
+                    "format": "XLS"
+                },
+                "source": {
+                    "type": "ckan-resource",
+                    "url": "https://example.com/p9l1d/2o289/f3yj9/8m05u/k61qv/xnpx9/0pbtw/ny3fe/api/3/action/resource_show?id=a6a23cd9-f2b7-4ed2-a4b8-a7ab593b01d7",
+                    "id": "example.com",
+                    "name": "example.com"
+                }
+            }
+        },
+        {
+            "id": "dist-example.com-a6a23cd9-f2b7-4ed2-a4b8-a7ab593b01d8",
+            "name": "Test Fake Resource 2",
+            "aspects": {
+                "ckan-resource": {
+                    "mimetype": null,
+                    "cache_url": null,
+                    "hash": "",
+                    "description": "This is test resource two",
+                    "name": "Test Fake Resource 2",
+                    "format": "XLS",
+                    "url": "https://demo.ckan.org/dataset/6633bb2c-8f85-4ac6-8c9b-c4ab740e1595/resource/a6a23cd9-f2b7-4ed2-a4b8-a7ab593b01d8/download/tnombres-2120093820.xls",
+                    "datastore_active": true,
+                    "cache_last_updated": null,
+                    "package_id": "6633bb2c-8f85-4ac6-8c9b-c4ab740e1595",
+                    "created": "2020-03-02T08:48:29.227790",
+                    "state": "active",
+                    "mimetype_inner": null,
+                    "last_modified": null,
+                    "position": 0,
+                    "revision_id": "58b1e592-4a25-41d7-b5c6-45e33db03e5c",
+                    "url_type": "upload",
+                    "id": "a6a23cd9-f2b7-4ed2-a4b8-a7ab593b01d8",
+                    "resource_type": null,
+                    "size": null
+                },
+                "dcat-distribution-strings": {
+                    "title": "Test Fake Resource 2",
+                    "description": "This is test resource two",
+                    "issued": "2020-03-02T08:48:29Z",
+                    "license": "Other (Open)",
+                    "downloadURL": "https://demo.ckan.org/dataset/6633bb2c-8f85-4ac6-8c9b-c4ab740e1595/resource/a6a23cd9-f2b7-4ed2-a4b8-a7ab593b01d8/download/tnombres-2120093820.xls",
+                    "format": "XLS"
+                },
+                "source": {
+                    "type": "ckan-resource",
+                    "url": "https://example.com/p9l1d/2o289/f3yj9/8m05u/k61qv/xnpx9/0pbtw/ny3fe/api/3/action/resource_show?id=a6a23cd9-f2b7-4ed2-a4b8-a7ab593b01d8",
+                    "id": "example.com",
+                    "name": "example.com"
+                }
+            }
+        }
+    ]
+}

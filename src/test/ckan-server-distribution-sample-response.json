@@ -1,0 +1,26 @@
+{
+    "help": "https://demo.ckan.org/api/3/action/help_show?name=resource_show",
+    "success": true,
+    "result": {
+        "mimetype": null,
+        "cache_url": null,
+        "hash": "",
+        "description": "This is test resource one",
+        "name": "Nombres masculinos más frecuentes en la provincia de Barcelona",
+        "format": "XLS",
+        "url": "https://demo.ckan.org/dataset/6633bb2c-8f85-4ac6-8c9b-c4ab740e1595/resource/a6a23cd9-f2b7-4ed2-a4b8-a7ab593b01d7/download/tnombres-2120093819.xls",
+        "datastore_active": true,
+        "cache_last_updated": null,
+        "package_id": "6633bb2c-8f85-4ac6-8c9b-c4ab740e1595",
+        "created": "2020-03-02T08:48:29.227790",
+        "state": "active",
+        "mimetype_inner": null,
+        "last_modified": null,
+        "position": 0,
+        "revision_id": "58b1e592-4a25-41d7-b5c6-45e33db03e4c",
+        "url_type": "upload",
+        "id": "a6a23cd9-f2b7-4ed2-a4b8-a7ab593b01d7",
+        "resource_type": null,
+        "size": null
+    }
+}
