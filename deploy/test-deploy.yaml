@@ -9,5 +9,7 @@ global:
   openfaas:
     functionNamespace: openfaas-fn
 
+deployFunctions: true
+
 includeCronJobs: true
 includeInitialJobs: true

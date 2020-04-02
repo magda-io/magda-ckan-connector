@@ -24,7 +24,7 @@ defaultImage:
   pullPolicy: IfNotPresent
   imagePullSecret: false
 
-openfaas: {}
+deployFunctions: false
 
 resources:
   requests:
