@@ -24,7 +24,8 @@ defaultImage:
   pullPolicy: IfNotPresent
   imagePullSecret: false
 
-deployFunctions: false
+createFunction: false
+createConfigMap: true
 
 resources:
   requests:

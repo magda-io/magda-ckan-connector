@@ -1,4 +1,4 @@
-{{- if and .Values.global.openfaas .Values.global.openfaas.functionNamespace .Values.deployFunctions }}
+{{- if and .Values.global.openfaas .Values.global.openfaas.functionNamespace .Values.createFunction }}
 apiVersion: openfaas.com/v1
 kind: Function
 metadata:
