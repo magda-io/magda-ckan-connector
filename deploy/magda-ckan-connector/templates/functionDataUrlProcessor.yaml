@@ -3,7 +3,7 @@ apiVersion: openfaas.com/v1
 kind: Function
 metadata:
   name: ckan-data-url-processor
-  namespace: {{ .Values.global.openfaas.functionNamespace | default "openfaas-fn" }}
+  namespace: {{ include "magda-ckan-connector.openfaaFunctionNamespace" . | quote }}
   labels: 
     magdaCategory: connectors
     magdaSubCategory: ckan-connector
