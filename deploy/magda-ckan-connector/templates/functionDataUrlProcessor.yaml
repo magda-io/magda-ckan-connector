@@ -1,4 +1,5 @@
 # More exmaples of openfaas function here: https://github.com/openfaas/openfaas-operator
+{{- if eq .Values.createFunction true }}
 {{- if .Values.global.openfaas.enabled | default false | ne true }}
 {{- fail "`ckan-connector-functions` requires `magda-core`.`openfaas` to deploy. Please turn of openfaas by setting `global.openfaas.enabled` to `true` or turn off `ckan-connector-functions` to avoid this error." }}
 {{- else }}
@@ -30,4 +31,5 @@ spec:
     exec_timeout: 60s
     userId: 00000000-0000-4000-8000-000000000000
 {{ .Values.resources | toYaml | indent 2 -}}
+{{- end }}
 {{- end }}
