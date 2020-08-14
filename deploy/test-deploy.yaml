@@ -7,6 +7,7 @@ global:
     includeCronJobs: true
     includeInitialJobs: true
   openfaas:
+    enabled: true
     functionNamespace: openfaas-fn
 
 createFunction: true
