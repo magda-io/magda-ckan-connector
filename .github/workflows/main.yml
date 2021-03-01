@@ -15,11 +15,10 @@ jobs:
     - run: yarn install
     - run: yarn build
     - run: yarn test
+    
     - name: helm-check
-      uses: igabaydulin/helm-check-action@0.1.4
-      env:
-        CHART_LOCATION: ./deploy/charts/magda-ckan-connector
-        CHART_VALUES: ./deploy/test-deploy.yaml
+      run: helm lint ./deploy/charts/magda-ckan-connector -f ./deploy/test-deploy.yaml
+
     - name: Login to GitHub Package Repository
       env:
         GH_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}

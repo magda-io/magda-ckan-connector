@@ -20,15 +20,13 @@ jobs:
     - run: yarn install
     - run: yarn build
     - run: yarn test
+    
     - name: helm-check
-      uses: igabaydulin/helm-check-action@0.1.4
-      env:
-        CHART_LOCATION: ./deploy/charts/magda-ckan-connector
-        CHART_VALUES: ./deploy/test-deploy.yaml
+      run: helm lint ./deploy/charts/magda-ckan-connector -f ./deploy/test-deploy.yaml
 
     - name: Login to GitHub Package Repository
       env:
-        GH_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+        GH_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
       run: docker login docker.pkg.github.com -u magdabot -p ${GH_TOKEN}
 
     - name: Build Docker Image & Push to Github Registry
@@ -54,7 +52,7 @@ jobs:
       
     - name: Release Helm Chart  
       env:
-        CR_TOKEN: "${{ secrets.GITHUB_ACCESS_TOKEN }}"
+        CR_TOKEN: "${{ secrets.GH_ACCESS_TOKEN }}"
       run: |
         owner=$(cut -d '/' -f 1 <<< "$GITHUB_REPOSITORY")
         repo=$(cut -d '/' -f 2 <<< "$GITHUB_REPOSITORY")
