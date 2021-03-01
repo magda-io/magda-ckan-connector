@@ -15,14 +15,15 @@ jobs:
     - run: yarn install
     - run: yarn build
     - run: yarn test
-    
+
     - name: helm-check
       run: helm lint ./deploy/charts/magda-ckan-connector -f ./deploy/test-deploy.yaml
 
     - name: Login to GitHub Package Repository
       env:
-        GH_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+        GH_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
       run: docker login docker.pkg.github.com -u magdabot -p ${GH_TOKEN}
+      
     - name: Build Docker Image & Push 
       run: yarn docker-build-prod --repository=docker.pkg.github.com/magda-io/magda-ckan-connector --name=magda-ckan-connector --version=${GITHUB_SHA}
     
