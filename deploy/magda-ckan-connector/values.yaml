@@ -11,8 +11,9 @@ global:
 # - Values.defaultImage.x
 # You can set `imagePullSecret` value to `false` (bool) to reset the value (see example below)
 
-image: 
-  name: "magda-ckan-connector"
+image: {}
+  # -- default docker image name 
+  # name: 
   # repository: 
   # tag: 
   # pullPolicy: 
@@ -20,7 +21,6 @@ image:
 
 defaultImage:
   repository: docker.io/data61
-  tag: 0.0.57-0
   pullPolicy: IfNotPresent
   imagePullSecret: false
 
