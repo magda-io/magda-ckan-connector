@@ -196,7 +196,6 @@ export default class Ckan implements ConnectorSource {
     public organizationList(): AsyncPage<CkanOrganizationListResponse> {
         const url = new URI(this.urlBuilder.getOrganizationListUrl())
             .addSearch("all_fields", "true")
-            .addSearch("include_users", "true")
             .addSearch("include_groups", "true")
             .addSearch("include_extras", "true")
             .addSearch("include_tags", "true");

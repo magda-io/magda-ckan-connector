@@ -124,21 +124,6 @@ describe("JsonTransformer", () => {
         success: true,
         result: [
             {
-                users: [
-                    {
-                        email_hash: "19f6388cf6512d13c55510136a872c3f",
-                        capacity: "admin",
-                        name: "alison-harvey-9198",
-                        created: "2018-12-18T10:35:44.915185",
-                        sysadmin: false,
-                        activity_streams_email_notifications: false,
-                        state: "active",
-                        number_of_edits: 0,
-                        display_name: "alison-harvey-9198",
-                        id: "b615ea6f-f19a-428f-8a2a-cb34cc54f007",
-                        number_created_packages: 0
-                    }
-                ],
                 display_name: "ABS (SA Data)",
                 description:
                     "Australian Bureau of Statistics - SA Data Released\r\n\r\n",
@@ -308,7 +293,6 @@ describe("JsonTransformer", () => {
             .get(/\/organization_list/)
             .query({
                 all_fields: "true",
-                include_users: "true",
                 include_groups: "true",
                 include_extras: "true",
                 include_tags: "true",
@@ -320,7 +304,6 @@ describe("JsonTransformer", () => {
             .get(/\/organization_list/)
             .query({
                 all_fields: "true",
-                include_users: "true",
                 include_groups: "true",
                 include_extras: "true",
                 include_tags: "true",
