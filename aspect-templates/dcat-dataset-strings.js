@@ -1,6 +1,12 @@
 var moment = libraries.moment;
 var ckan = libraries.ckan;
 
+var landingPage = ckan.getDatasetLandingPageUrl(dataset.id);
+
+if (dataset.extras && dataset.extras.harvest_url) {
+    landingPage = dataset.extras.harvest_url;
+}
+
 return {
     title: dataset.title || dataset.name,
     description: dataset.notes,
@@ -21,5 +27,5 @@ return {
     themes: (dataset.groups || []).map(group => group.title),
     keywords: (dataset.tags || []).map(tag => tag.name),
     contactPoint: dataset.contact_point,
-    landingPage: ckan.getDatasetLandingPageUrl(dataset.id)
+    landingPage: landingPage
 };
