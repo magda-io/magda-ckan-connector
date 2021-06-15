@@ -14,6 +14,23 @@ export interface CreateTransformerOptions {
     tenantId: number;
 }
 
+type ExtraDataType = {
+    key: string;
+    value: any;
+}[];
+
+function getExtraData<T = any>(dataset: any, key: string): T | null {
+    if (!dataset?.extras?.length) {
+        return null;
+    }
+    const extraData = dataset.extras as ExtraDataType;
+    const item = extraData.find(item => item.key === key);
+    if (!item) {
+        return null;
+    }
+    return item?.value;
+}
+
 export default function createTransformer({
     name,
     id,
@@ -32,6 +49,7 @@ export default function createTransformer({
         libraries: {
             cleanOrgTitle: cleanOrgTitle,
             moment: moment,
+            getExtraData: getExtraData,
             URI: URI,
             ckan: new CkanUrlBuilder({
                 id: id,

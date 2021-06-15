@@ -1,4 +1,5 @@
 var ckan = libraries.ckan;
+var getExtraData = libraries.getExtraData;
 
 const sourceData = {
     type: "ckan-dataset",
@@ -7,12 +8,15 @@ const sourceData = {
     name: ckan.name
 };
 
-if (dataset.extras && dataset.extras.harvest_portal) {
-    sourceData.originalName = dataset.extras.harvest_portal;
+var harvestPortal = getExtraData(dataset, "harvest_portal");
+var harvestUrl = getExtraData(dataset, "harvest_url");
+
+if (harvestPortal) {
+    sourceData.originalName = harvestPortal;
 }
 
-if (dataset.extras && dataset.extras.harvest_url) {
-    sourceData.originalUrl = dataset.extras.harvest_url;
+if (harvestUrl) {
+    sourceData.originalUrl = harvestUrl;
 }
 
 return sourceData;

@@ -1,11 +1,11 @@
 var moment = libraries.moment;
 var ckan = libraries.ckan;
+var getExtraData = libraries.getExtraData;
 
-var landingPage = ckan.getDatasetLandingPageUrl(dataset.id);
-
-if (dataset.extras && dataset.extras.harvest_url) {
-    landingPage = dataset.extras.harvest_url;
-}
+var harvestUrl = getExtraData(dataset, "harvest_url");
+var landingPage = harvestUrl
+    ? harvestUrl
+    : ckan.getDatasetLandingPageUrl(dataset.id);
 
 return {
     title: dataset.title || dataset.name,
