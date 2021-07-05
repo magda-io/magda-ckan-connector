@@ -19,13 +19,21 @@ return {
     languages: dataset.language ? [dataset.language] : [],
     publisher: (dataset.organization || {}).title,
     accrualPeriodicity: dataset.update_freq,
-    spatial: dataset.spatial_coverage || dataset.spatial,
+    spatial:
+        dataset.spatial_coverage ||
+        dataset.spatial ||
+        getExtraData(dataset, "spatial_coverage"),
     temporal: {
-        start: dataset.temporal_coverage_from,
-        end: dataset.temporal_coverage_to
+        start:
+            dataset.temporal_coverage_from ||
+            getExtraData(dataset, "temporal_coverage_from"),
+        end:
+            dataset.temporal_coverage_to ||
+            getExtraData(dataset, "temporal_coverage_to")
     },
     themes: (dataset.groups || []).map(group => group.title),
     keywords: (dataset.tags || []).map(tag => tag.name),
-    contactPoint: dataset.contact_point,
+    contactPoint:
+        dataset.contact_point || getExtraData(dataset, "contact_point"),
     landingPage: landingPage
 };
