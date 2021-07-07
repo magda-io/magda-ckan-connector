@@ -1,0 +1,329 @@
+{
+    "dataset": {
+        "id": "ds-example.com-4b946b11-b028-4467-97f4-6b86ffcd2636",
+        "name": "ANUClim (Australia), Current Climate December, (1976-2005), 30 arcsec (~1km)",
+        "aspects": {
+            "source": {
+                "id": "example.com",
+                "name": "example.com",
+                "type": "ckan-dataset",
+                "url": "https://ckan.dev.ecocommons.org.au/api/3/action/package_show?id=4b946b11-b028-4467-97f4-6b86ffcd2636"
+            },
+            "dcat-dataset-strings": {
+                "description": "",
+                "issued": "2021-06-14T06:26:53Z",
+                "keywords": [],
+                "landingPage": "https://ckan.dev.ecocommons.org.au/dataset/4b946b11-b028-4467-97f4-6b86ffcd2636",
+                "languages": [],
+                "modified": "2021-06-15T23:16:26Z",
+                "publisher": "testorg",
+                "temporal": {
+                    "end": "2005",
+                    "start": "1976"
+                },
+                "spatial": "Australia",
+                "themes": [""],
+                "contactPoint": "admin@ecocommons.org.au",
+                "title": "ANUClim (Australia), Current Climate December, (1976-2005), 30 arcsec (~1km)"
+            },
+            "ckan-dataset": {
+                "author": null,
+                "author_email": null,
+                "creator_user_id": "7dfe3925-15a9-4804-a8ec-d3f6d233597c",
+                "extras": [
+                    {
+                        "key": "contact_point",
+                        "value": "admin@ecocommons.org.au"
+                    },
+                    {
+                        "key": "license_title",
+                        "value": "Creative Commons Attribution 4.0https://creativecommons.org/licenses/by/4.0/"
+                    },
+                    {
+                        "key": "spatial_coverage",
+                        "value": "Australia"
+                    },
+                    {
+                        "key": "temporal_coverage_from",
+                        "value": "1976"
+                    },
+                    {
+                        "key": "temporal_coverage_to",
+                        "value": "2005"
+                    }
+                ],
+                "groups": [
+                    {
+                        "description": "Monthly climate data for the Australian continent Geographic extent: Australia Year range: 1976-2005 Resolution: 30 arcsec (~1km) Data layers: Minimum/Maximum Temperature, Precipitation, Evaporation, Vapour Pressure",
+                        "display_name": "anuclim_climate_data",
+                        "id": "6941c2c3-1bfd-4b47-a18d-2405af33dc6e",
+                        "image_display_url": "",
+                        "name": "anuclim_climate_data",
+                        "title": ""
+                    }
+                ],
+                "id": "4b946b11-b028-4467-97f4-6b86ffcd2636",
+                "isopen": false,
+                "license_id": null,
+                "license_title": null,
+                "maintainer": null,
+                "maintainer_email": null,
+                "metadata_created": "2021-06-14T06:26:53.937549",
+                "metadata_modified": "2021-06-15T23:16:26.145336",
+                "name": "anuclim_australia_current_climate_december_1976_2005_30_arcsec_1km",
+                "notes": "",
+                "num_resources": 5,
+                "num_tags": 0,
+                "organization": {
+                    "approval_status": "approved",
+                    "created": "2021-06-08T23:11:21.920250",
+                    "description": "Test Organization",
+                    "id": "81ba6538-d149-4dfa-9821-c2b6349d0599",
+                    "image_url": "",
+                    "is_organization": true,
+                    "name": "testorg",
+                    "state": "active",
+                    "title": "testorg",
+                    "type": "organization"
+                },
+                "owner_org": "81ba6538-d149-4dfa-9821-c2b6349d0599",
+                "private": false,
+                "relationships_as_object": [],
+                "relationships_as_subject": [],
+                "state": "active",
+                "tags": [],
+                "title": "ANUClim (Australia), Current Climate December, (1976-2005), 30 arcsec (~1km)",
+                "type": "dataset",
+                "url": null,
+                "version": null
+            }
+        }
+    },
+    "distributions": [
+        {
+            "aspects": {
+                "ckan-resource": {
+                    "created": "2021-06-15T23:16:24.562909",
+                    "description": "Total Monthly Evaporation",
+                    "cache_last_updated": null,
+                    "cache_url": null,
+                    "last_modified": null,
+                    "mimetype_inner": null,
+                    "resource_type": null,
+                    "size": null,
+                    "format": "TIFF",
+                    "hash": "",
+                    "id": "af1facf9-eda1-4c5e-ab58-cb225a37cac5",
+                    "metadata_modified": "2021-06-15T23:16:24.527156",
+                    "mimetype": "image/tiff",
+                    "name": "total_monthly_evaporation",
+                    "package_id": "4b946b11-b028-4467-97f4-6b86ffcd2636",
+                    "position": 0,
+                    "state": "active",
+                    "title": "Total Monthly Evaporation",
+                    "url": "http://127.0.0.1:9000/api/data/a552000f-9c0e-561a-ae0a-6da576cae14a/download/anuclim_mevap_12.tif",
+                    "url_type": null,
+                    "webstore_url": "https://www.ecocommons.org.au"
+                },
+                "dcat-distribution-strings": {
+                    "accessURL": "https://www.ecocommons.org.au",
+                    "description": "Total Monthly Evaporation",
+                    "downloadURL": "http://127.0.0.1:9000/api/data/a552000f-9c0e-561a-ae0a-6da576cae14a/download/anuclim_mevap_12.tif",
+                    "format": "TIFF",
+                    "issued": "2021-06-15T23:16:24Z",
+                    "license": "Creative Commons Attribution 4.0https://creativecommons.org/licenses/by/4.0/",
+                    "mediaType": "image/tiff",
+                    "title": "total_monthly_evaporation"
+                },
+                "source": {
+                    "id": "example.com",
+                    "name": "example.com",
+                    "type": "ckan-resource",
+                    "url": "https://ckan.dev.ecocommons.org.au/api/3/action/resource_show?id=af1facf9-eda1-4c5e-ab58-cb225a37cac5"
+                }
+            },
+            "id": "dist-example.com-af1facf9-eda1-4c5e-ab58-cb225a37cac5",
+            "name": "total_monthly_evaporation"
+        },
+        {
+            "aspects": {
+                "ckan-resource": {
+                    "created": "2021-06-15T23:16:24.921790",
+                    "cache_last_updated": null,
+                    "cache_url": null,
+                    "last_modified": null,
+                    "mimetype_inner": null,
+                    "resource_type": null,
+                    "size": null,
+                    "description": "Average Monthly Precipitation",
+                    "format": "TIFF",
+                    "hash": "",
+                    "id": "081f4b6a-9a0a-4e33-86d8-8b42ab1b1668",
+                    "metadata_modified": "2021-06-15T23:16:24.881458",
+                    "mimetype": "image/tiff",
+                    "name": "average_monthly_precipitation",
+                    "package_id": "4b946b11-b028-4467-97f4-6b86ffcd2636",
+                    "position": 1,
+                    "state": "active",
+                    "title": "Average Monthly Precipitation",
+                    "url": "http://127.0.0.1:9000/api/data/7082e04e-c3d7-5c52-aebd-31f00e9740a0/download/anuclim_mprec_12.tif",
+                    "url_type": null,
+                    "webstore_url": "https://www.ecocommons.org.au"
+                },
+                "dcat-distribution-strings": {
+                    "accessURL": "https://www.ecocommons.org.au",
+                    "description": "Average Monthly Precipitation",
+                    "downloadURL": "http://127.0.0.1:9000/api/data/7082e04e-c3d7-5c52-aebd-31f00e9740a0/download/anuclim_mprec_12.tif",
+                    "format": "TIFF",
+                    "issued": "2021-06-15T23:16:24Z",
+                    "mediaType": "image/tiff",
+                    "license": "Creative Commons Attribution 4.0https://creativecommons.org/licenses/by/4.0/",
+                    "title": "average_monthly_precipitation"
+                },
+                "source": {
+                    "id": "example.com",
+                    "name": "example.com",
+                    "type": "ckan-resource",
+                    "url": "https://ckan.dev.ecocommons.org.au/api/3/action/resource_show?id=081f4b6a-9a0a-4e33-86d8-8b42ab1b1668"
+                }
+            },
+            "id": "dist-example.com-081f4b6a-9a0a-4e33-86d8-8b42ab1b1668",
+            "name": "average_monthly_precipitation"
+        },
+        {
+            "aspects": {
+                "ckan-resource": {
+                    "created": "2021-06-15T23:16:25.256454",
+                    "cache_last_updated": null,
+                    "cache_url": null,
+                    "last_modified": null,
+                    "mimetype_inner": null,
+                    "resource_type": null,
+                    "size": null,
+                    "description": "Average Monthly Maximum Temperature",
+                    "format": "TIFF",
+                    "hash": "",
+                    "id": "5818adcc-f0b1-4b26-b86b-4fccee886efd",
+                    "metadata_modified": "2021-06-15T23:16:25.219085",
+                    "mimetype": "image/tiff",
+                    "name": "average_monthly_maximum_temperature",
+                    "package_id": "4b946b11-b028-4467-97f4-6b86ffcd2636",
+                    "position": 2,
+                    "state": "active",
+                    "title": "Average Monthly Maximum Temperature",
+                    "url": "http://127.0.0.1:9000/api/data/e0ab001e-40d0-50cb-81f6-3dc1b5d5d473/download/anuclim_mtmax_12.tif",
+                    "url_type": null,
+                    "webstore_url": "https://www.ecocommons.org.au"
+                },
+                "dcat-distribution-strings": {
+                    "accessURL": "https://www.ecocommons.org.au",
+                    "description": "Average Monthly Maximum Temperature",
+                    "downloadURL": "http://127.0.0.1:9000/api/data/e0ab001e-40d0-50cb-81f6-3dc1b5d5d473/download/anuclim_mtmax_12.tif",
+                    "format": "TIFF",
+                    "issued": "2021-06-15T23:16:25Z",
+                    "mediaType": "image/tiff",
+                    "license": "Creative Commons Attribution 4.0https://creativecommons.org/licenses/by/4.0/",
+                    "title": "average_monthly_maximum_temperature"
+                },
+                "source": {
+                    "id": "example.com",
+                    "name": "example.com",
+                    "type": "ckan-resource",
+                    "url": "https://ckan.dev.ecocommons.org.au/api/3/action/resource_show?id=5818adcc-f0b1-4b26-b86b-4fccee886efd"
+                }
+            },
+            "id": "dist-example.com-5818adcc-f0b1-4b26-b86b-4fccee886efd",
+            "name": "average_monthly_maximum_temperature"
+        },
+        {
+            "aspects": {
+                "ckan-resource": {
+                    "created": "2021-06-15T23:16:25.715861",
+                    "description": "Average Monthly Minimum Temperature",
+                    "cache_last_updated": null,
+                    "cache_url": null,
+                    "last_modified": null,
+                    "mimetype_inner": null,
+                    "resource_type": null,
+                    "size": null,
+                    "format": "TIFF",
+                    "hash": "",
+                    "id": "85af3b1b-5f0c-49b1-9def-cd6f1fabb56e",
+                    "metadata_modified": "2021-06-15T23:16:25.675568",
+                    "mimetype": "image/tiff",
+                    "name": "average_monthly_minimum_temperature",
+                    "package_id": "4b946b11-b028-4467-97f4-6b86ffcd2636",
+                    "position": 3,
+                    "state": "active",
+                    "title": "Average Monthly Minimum Temperature",
+                    "url": "http://127.0.0.1:9000/api/data/450719c1-6147-5ce1-909a-7daf22d6747f/download/anuclim_mtmin_12.tif",
+                    "url_type": null,
+                    "webstore_url": "https://www.ecocommons.org.au"
+                },
+                "dcat-distribution-strings": {
+                    "accessURL": "https://www.ecocommons.org.au",
+                    "description": "Average Monthly Minimum Temperature",
+                    "downloadURL": "http://127.0.0.1:9000/api/data/450719c1-6147-5ce1-909a-7daf22d6747f/download/anuclim_mtmin_12.tif",
+                    "format": "TIFF",
+                    "issued": "2021-06-15T23:16:25Z",
+                    "mediaType": "image/tiff",
+                    "license": "Creative Commons Attribution 4.0https://creativecommons.org/licenses/by/4.0/",
+                    "title": "average_monthly_minimum_temperature"
+                },
+                "source": {
+                    "id": "example.com",
+                    "name": "example.com",
+                    "type": "ckan-resource",
+                    "url": "https://ckan.dev.ecocommons.org.au/api/3/action/resource_show?id=85af3b1b-5f0c-49b1-9def-cd6f1fabb56e"
+                }
+            },
+            "id": "dist-example.com-85af3b1b-5f0c-49b1-9def-cd6f1fabb56e",
+            "name": "average_monthly_minimum_temperature"
+        },
+        {
+            "aspects": {
+                "ckan-resource": {
+                    "created": "2021-06-15T23:16:26.188878",
+                    "description": "Average Monthly Vapour Pressure",
+                    "cache_last_updated": null,
+                    "cache_url": null,
+                    "last_modified": null,
+                    "mimetype_inner": null,
+                    "resource_type": null,
+                    "size": null,
+                    "format": "TIFF",
+                    "hash": "",
+                    "id": "b42ec92f-1f02-4dd8-aa26-2e596b97880a",
+                    "metadata_modified": "2021-06-15T23:16:26.151941",
+                    "mimetype": "image/tiff",
+                    "name": "average_monthly_vapour_pressure",
+                    "package_id": "4b946b11-b028-4467-97f4-6b86ffcd2636",
+                    "position": 4,
+                    "state": "active",
+                    "title": "Average Monthly Vapour Pressure",
+                    "url": "http://127.0.0.1:9000/api/data/1bf17e49-2aa1-5ad0-848a-0a215fc2ef63/download/anuclim_mvapp_12.tif",
+                    "url_type": null,
+                    "webstore_url": "https://www.ecocommons.org.au"
+                },
+                "dcat-distribution-strings": {
+                    "accessURL": "https://www.ecocommons.org.au",
+                    "description": "Average Monthly Vapour Pressure",
+                    "downloadURL": "http://127.0.0.1:9000/api/data/1bf17e49-2aa1-5ad0-848a-0a215fc2ef63/download/anuclim_mvapp_12.tif",
+                    "format": "TIFF",
+                    "issued": "2021-06-15T23:16:26Z",
+                    "mediaType": "image/tiff",
+                    "license": "Creative Commons Attribution 4.0https://creativecommons.org/licenses/by/4.0/",
+                    "title": "average_monthly_vapour_pressure"
+                },
+                "source": {
+                    "id": "example.com",
+                    "name": "example.com",
+                    "type": "ckan-resource",
+                    "url": "https://ckan.dev.ecocommons.org.au/api/3/action/resource_show?id=b42ec92f-1f02-4dd8-aa26-2e596b97880a"
+                }
+            },
+            "id": "dist-example.com-b42ec92f-1f02-4dd8-aa26-2e596b97880a",
+            "name": "average_monthly_vapour_pressure"
+        }
+    ]
+}

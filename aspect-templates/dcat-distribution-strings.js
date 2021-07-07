@@ -1,4 +1,5 @@
 var moment = libraries.moment;
+var getExtraData = libraries.getExtraData;
 
 return {
     title: distribution.name || distribution.id,
@@ -9,7 +10,7 @@ return {
     modified: distribution.last_modified
         ? moment.utc(distribution.last_modified).format()
         : undefined,
-    license: dataset.license_title || undefined,
+    license: dataset.license_title || getExtraData(dataset, "license_title"),
     accessURL: distribution.webstore_url || undefined,
     downloadURL: distribution.url || undefined,
     mediaType:

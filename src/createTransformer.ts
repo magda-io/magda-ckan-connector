@@ -19,14 +19,14 @@ type ExtraDataType = {
     value: any;
 }[];
 
-function getExtraData<T = any>(dataset: any, key: string): T | null {
+function getExtraData<T = any>(dataset: any, key: string): T | undefined {
     if (!dataset?.extras?.length) {
-        return null;
+        return undefined;
     }
     const extraData = dataset.extras as ExtraDataType;
     const item = extraData.find(item => item.key === key);
     if (!item) {
-        return null;
+        return undefined;
     }
     return item?.value;
 }
