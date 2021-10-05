@@ -19,7 +19,7 @@ spec:
         spec:
           {{- $imagePullSecrets := include "magda.imagePullSecrets" . }}
           {{- if $imagePullSecrets | empty | not }}
-{{ $imagePullSecret | indent 10 }}
+{{ $imagePullSecrets | indent 10 }}
           {{- end }}
           containers:
             - name: connector-{{ .Values.config.id }}
