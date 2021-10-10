@@ -17,10 +17,7 @@ spec:
         metadata:
           name: connector-{{ .Values.config.id }}
         spec:
-          {{- $imagePullSecrets := include "magda.imagePullSecrets" . }}
-          {{- if $imagePullSecrets | empty | not }}
-          {{- $imagePullSecrets | indent 10 }}
-          {{- end }}
+          {{- include "magda.imagePullSecrets" . | indent 10 }}
           containers:
             - name: connector-{{ .Values.config.id }}
               image: {{ include "magda.image" . | quote }}
