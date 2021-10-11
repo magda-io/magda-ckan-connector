@@ -15,3 +15,7 @@ createConfigMap: true
 
 includeCronJobs: true
 includeInitialJobs: true
+
+secrets:
+- secret-name-1
+- secret-name-2
