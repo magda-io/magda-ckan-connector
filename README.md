@@ -32,6 +32,10 @@ Development releases (per commit) are also available from [GitHub Registry](http
 
 Kubernetes: `>= 1.14.0-0`
 
+| Repository              | Name         | Version       |
+| ----------------------- | ------------ | ------------- |
+| https://charts.magda.io | magda-common | 1.0.0-alpha.4 |
+
 ## Values
 
 | Key                                | Type   | Default                       | Description |
