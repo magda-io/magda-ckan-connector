@@ -7,7 +7,6 @@ global:
 # image setting loadding order: (from higher priority to lower priority)
 # - Values.image.x
 # - Values.global.connectors.image.x
-# - Values.global.image.x
 # - Values.defaultImage.x
 # You can set `imagePullSecret` value to `false` (bool) to reset the value (see example below)
 
@@ -59,7 +58,7 @@ config:
   ## The base URL of the place to source data from
   sourceUrl: "https://data.gov.au/data/"
   ## When crawling through from beginning to end, how big should the individual requests be in records?
-  pageSize: 1000
+  pageSize: 100
   
   ## Crontab schedule for how often this should happen.
   # default = "0 14 * * 6" i.e. 12am Sydney time on Sunday
