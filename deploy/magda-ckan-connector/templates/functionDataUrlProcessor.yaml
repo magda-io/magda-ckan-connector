@@ -31,6 +31,9 @@ spec:
     exec_timeout: 60s
     userId: 00000000-0000-4000-8000-000000000000
   {{- $pullSecrets := include "magda.image.getConsolidatedPullSecretList" . | mustFromJson }}
+  {{- if and (.Values.secrets | empty | not) (kindIs "slice" .Values.secrets) }}
+    {{- $pullSecrets = concat $pullSecrets .Values.secrets }}
+  {{- end }}
   {{- if (not (empty $pullSecrets)) }}
   secrets: 
     {{- range $pullSecrets }}

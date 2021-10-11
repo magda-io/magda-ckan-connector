@@ -1,3 +1,7 @@
+# 1.2.1
+
+-   Better secret support for openfaas function
+
 # 1.2.0
 
 -   Use magda-common for docker image related logic as per ticket: https://github.com/magda-io/magda/issues/3229
