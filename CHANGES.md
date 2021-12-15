@@ -1,3 +1,8 @@
+# 1.3.0
+
+-   Remove labels from metadata ( use labels in `spec` instead)
+-   Release multi-arch docker images (linux/amd64, linux/arm64) from CI pipeline
+
 # 1.2.1
 
 -   Better secret support for openfaas function

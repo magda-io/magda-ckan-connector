@@ -8,10 +8,6 @@ kind: Function
 metadata:
   name: ckan-data-url-processor
   namespace: {{ include "magda-ckan-connector.openfaaFunctionNamespace" . | quote }}
-  labels: 
-    magdaCategory: connectors
-    magdaSubCategory: ckan-connector
-    magdaType: data-url-processor
 spec:
   name: ckan-data-url-processor
   handler: node bootstrap.js
