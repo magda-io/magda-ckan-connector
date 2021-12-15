@@ -43,7 +43,7 @@ Kubernetes: `>= 1.14.0-0`
 | config.id                          | string | `"dga"`                       |             |
 | config.ignoreHarvestSources[0]     | string | `"*"`                         |             |
 | config.name                        | string | `"data.gov.au"`               |             |
-| config.pageSize                    | int    | `1000`                        |             |
+| config.pageSize                    | int    | `100`                         |             |
 | config.sourceUrl                   | string | `"https://data.gov.au/data/"` |             |
 | createConfigMap                    | bool   | `true`                        |             |
 | createFunction                     | bool   | `false`                       |             |
