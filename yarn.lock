@@ -35,10 +35,10 @@
     "@types/urijs" "^1.15.34"
     "@types/yargs" "^12.0.8"
 
-"@magda/docker-utils@^0.0.60-rc.3":
-  version "0.0.60-rc.3"
-  resolved "https://registry.yarnpkg.com/@magda/docker-utils/-/docker-utils-0.0.60-rc.3.tgz#b0c3a27ae56926acd1db84f25b3d9e68d144434e"
-  integrity sha512-qomdXHGQkhA6UB8woHw29suatJWu8v7mA3FzCSPUCymh8aIrwYg118dJ/5x5rjhQB9BuFXHxZJhRWj/rSfVnZA==
+"@magda/docker-utils@^1.1.0-alpha.4":
+  version "1.1.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@magda/docker-utils/-/docker-utils-1.1.0-alpha.4.tgz#cd2427b3ad0f88b236818736d3396534f0cc8388"
+  integrity sha512-/+cmvAdtu9lZ0J1TjAzY9uEvaTdKLewazCLAaHd3hVg3ac45dYbLVz38/wXRTMaY1knoF8t0ySfL3FMGTvJSxA==
   dependencies:
     fs-extra "^2.1.2"
     is-subdir "^1.0.2"
