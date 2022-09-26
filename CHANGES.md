@@ -1,3 +1,11 @@
+# 2.0.0
+
+-   Upgrade to node 14
+-   Use node-fetch for all HTTP request
+-   Upgrade to typescript 4 & webpack 5
+-   Upgrade @magda dependencies to v2
+-   Fix #10: retry the request when 0 count received for package_search request
+
 # 1.3.0
 
 -   Remove labels from metadata ( use labels in `spec` instead)

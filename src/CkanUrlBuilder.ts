@@ -10,8 +10,8 @@ export interface CkanUrlBuilderOptions {
 export default class CkanUrlBuilder {
     public readonly id: string;
     public readonly name: string;
-    public readonly baseUrl: uri.URI;
-    public readonly apiBaseUrl: uri.URI;
+    public readonly baseUrl: URI;
+    public readonly apiBaseUrl: URI;
 
     constructor(options: CkanUrlBuilderOptions) {
         this.id = options.id;
@@ -72,10 +72,6 @@ export default class CkanUrlBuilder {
     }
 
     public getDatasetLandingPageUrl(id: string): string {
-        return this.baseUrl
-            .clone()
-            .segment("dataset")
-            .segment(id)
-            .toString();
+        return this.baseUrl.clone().segment("dataset").segment(id).toString();
     }
 }

@@ -31,9 +31,9 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: [".tsx", ".ts", ".js"]
-    },
-    node: {
-        fs: "empty"
+        extensions: [".tsx", ".ts", ".js"],
+        fallback: {
+            fs: false
+        }
     }
 };

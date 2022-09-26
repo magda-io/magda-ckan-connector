@@ -2,12 +2,12 @@ import {
     AsyncPage,
     forEachAsync,
     formatServiceError,
-    retry,
-    request
+    retry
 } from "@magda/utils";
 import CkanUrlBuilder from "./CkanUrlBuilder";
 import { ConnectorSource } from "@magda/connector-sdk";
 import URI from "urijs";
+import requestJson from "./requestJson";
 
 export interface CkanThing {
     id: string;
@@ -109,7 +109,7 @@ export default class Ckan implements ConnectorSource {
             options.allowedOrganisationNames &&
             options.allowedOrganisationNames.length > 0
         ) {
-            const encOrgs = options.allowedOrganisationNames.map(title => {
+            const encOrgs = options.allowedOrganisationNames.map((title) => {
                 const encoded =
                     title === "*"
                         ? title
@@ -125,7 +125,7 @@ export default class Ckan implements ConnectorSource {
             options.ignoreOrganisationNames.length > 0
         ) {
             solrQueries.push(
-                ...options.ignoreOrganisationNames.map(title => {
+                ...options.ignoreOrganisationNames.map((title) => {
                     const encoded =
                         title === "*"
                             ? title
@@ -141,7 +141,7 @@ export default class Ckan implements ConnectorSource {
             options.ignoreHarvestSources.length > 0
         ) {
             solrQueries.push(
-                ...options.ignoreHarvestSources.map(title => {
+                ...options.ignoreHarvestSources.map((title) => {
                     const encoded =
                         title === "*"
                             ? title
@@ -169,7 +169,7 @@ export default class Ckan implements ConnectorSource {
         const startStart = options.start || 0;
         let startIndex = startStart;
 
-        return AsyncPage.create<CkanPackageSearchResponse>(previous => {
+        return AsyncPage.create<CkanPackageSearchResponse>((previous) => {
             if (previous) {
                 startIndex += this.pageSize;
                 if (
@@ -201,7 +201,7 @@ export default class Ckan implements ConnectorSource {
             .addSearch("include_tags", "true");
 
         let startIndex = 0;
-        return AsyncPage.create<CkanOrganizationListResponse>(previous => {
+        return AsyncPage.create<CkanOrganizationListResponse>((previous) => {
             if (previous) {
                 if (previous.result.length === 0) {
                     return undefined;
@@ -218,23 +218,15 @@ export default class Ckan implements ConnectorSource {
             ignoreHarvestSources: this.ignoreHarvestSources,
             allowedOrganisationNames: this.allowedOrganisationNames,
             ignoreOrganisationNames: this.ignoreOrganisationNames,
-            sort: "metadata_created asc"
+            sort: "id asc"
         });
-        return packagePages.map(packagePage => packagePage.result.results);
+        return packagePages.map((packagePage) => packagePage.result.results);
     }
 
-    public getJsonDataset(id: string): Promise<any> {
+    public async getJsonDataset(id: string): Promise<any> {
         const url = this.urlBuilder.getPackageShowUrl(id);
-
-        return new Promise<any>((resolve, reject) => {
-            request(url, { json: true }, (error, response, body) => {
-                if (error) {
-                    reject(error);
-                    return;
-                }
-                resolve(body.result);
-            });
-        });
+        const data = await requestJson(url);
+        return data.result;
     }
 
     public searchDatasetsByTitle(
@@ -248,7 +240,7 @@ export default class Ckan implements ConnectorSource {
             title: title,
             maxResults: maxResults
         });
-        return packagePages.map(packagePage => packagePage.result.results);
+        return packagePages.map((packagePage) => packagePage.result.results);
     }
 
     public getJsonDistributions(dataset: any): AsyncPage<object[]> {
@@ -265,7 +257,7 @@ export default class Ckan implements ConnectorSource {
             return new AsyncPage(undefined, false, async () => {
                 return new AsyncPage(
                     await Promise.all(
-                        this.allowedOrganisationNames.map(name => {
+                        this.allowedOrganisationNames.map((name) => {
                             return this.getJsonFirstClassOrganization(name);
                         })
                     ),
@@ -276,22 +268,14 @@ export default class Ckan implements ConnectorSource {
         }
         const organizationPages = this.organizationList();
         return organizationPages.map(
-            organizationPage => organizationPage.result
+            (organizationPage) => organizationPage.result
         );
     }
 
-    public getJsonFirstClassOrganization(id: string): Promise<object> {
+    public async getJsonFirstClassOrganization(id: string): Promise<object> {
         const url = this.urlBuilder.getOrganizationShowUrl(id);
-
-        return new Promise<any>((resolve, reject) => {
-            request(url, { json: true }, (error, response, body) => {
-                if (error) {
-                    reject(error);
-                    return;
-                }
-                resolve(body.result);
-            });
-        });
+        const data = await requestJson(url);
+        return data.result;
     }
 
     public searchFirstClassOrganizationsByTitle(
@@ -306,26 +290,21 @@ export default class Ckan implements ConnectorSource {
             .addSearch("limit", maxResults)
             .toString();
 
-        const promise = new Promise<any>((resolve, reject) => {
-            request(url, { json: true }, (error, response, body) => {
-                if (error) {
-                    reject(error);
-                    return;
-                }
-                resolve(body.result);
-            });
-        });
+        const promise = (async () => {
+            const data = await requestJson(url);
+            return data.result;
+        })();
 
         // CKAN (at least v2.5.2 currently on data.gov.au) doesn't honor the `limit` parameter.  So trim the results here.
-        const trimmedResults = AsyncPage.singlePromise<any[]>(
-            promise
-        ).map(organizations => organizations.slice(0, maxResults));
+        const trimmedResults = AsyncPage.singlePromise<any[]>(promise).map(
+            (organizations) => organizations.slice(0, maxResults)
+        );
 
         const result: any[] = [];
         return AsyncPage.singlePromise<any[]>(
             forEachAsync(trimmedResults, 6, (organization: any) => {
                 return this.getJsonFirstClassOrganization(organization.id).then(
-                    organizationDetails => {
+                    (organizationDetails) => {
                         result.push(organizationDetails);
                     }
                 );
@@ -348,7 +327,7 @@ export default class Ckan implements ConnectorSource {
     }
 
     private requestPackageSearchPage(
-        url: uri.URI,
+        url: URI,
         fqComponent: string,
         startIndex: number,
         maxResults: number
@@ -357,19 +336,23 @@ export default class Ckan implements ConnectorSource {
         pageUrl.addSearch("start", startIndex);
         pageUrl.addSearch("rows", this.pageSize);
 
-        const operation = () =>
-            new Promise<CkanPackageSearchResponse>((resolve, reject) => {
-                const requestUrl = pageUrl.toString() + fqComponent;
-                console.log("Requesting " + requestUrl);
-                request(requestUrl, { json: true }, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                        return;
-                    }
-                    console.log("Received@" + startIndex);
-                    resolve(body);
-                });
-            });
+        const operation = async () => {
+            const requestUrl = pageUrl.toString() + fqComponent;
+            console.log("Requesting " + requestUrl);
+
+            const data = await requestJson<CkanPackageSearchResponse>(
+                requestUrl
+            );
+
+            console.log("Received@" + startIndex);
+            if (!data?.result?.count) {
+                throw new Error(
+                    "Invalid 0 count CKAN package_search response: " +
+                        JSON.stringify(data)
+                );
+            }
+            return data;
+        };
 
         return retry(
             operation,
@@ -387,7 +370,7 @@ export default class Ckan implements ConnectorSource {
     }
 
     private requestOrganizationListPage(
-        url: uri.URI,
+        url: URI,
         startIndex: number,
         previous: CkanOrganizationListResponse
     ): Promise<CkanOrganizationListResponse> {
@@ -395,38 +378,26 @@ export default class Ckan implements ConnectorSource {
         pageUrl.addSearch("offset", startIndex);
         pageUrl.addSearch("limit", this.pageSize);
 
-        const operation = () =>
-            new Promise<CkanOrganizationListResponse>((resolve, reject) => {
-                console.log("Requesting " + pageUrl.toString());
-                request(
-                    pageUrl.toString(),
-                    { json: true },
-                    (error, response, body) => {
-                        if (error) {
-                            reject(error);
-                            return;
-                        }
-                        console.log("Received@" + startIndex);
+        const operation = async () => {
+            console.log("Requesting " + pageUrl.toString());
+            const data = await requestJson<CkanOrganizationListResponse>(
+                pageUrl.toString()
+            );
+            console.log("Received@" + startIndex);
 
-                        // Older versions of CKAN ignore the offset and limit parameters and just return all orgs.
-                        // To avoid paging forever in that scenario, we check if this page is identical to the last one
-                        // and ignore the items if so.
-                        if (
-                            previous &&
-                            body &&
-                            previous.result &&
-                            body.result &&
-                            previous.result.length === body.result.length &&
-                            JSON.stringify(previous.result) ===
-                                JSON.stringify(body.result)
-                        ) {
-                            body.result.length = 0;
-                        }
-
-                        resolve(body);
-                    }
-                );
-            });
+            //Older versions of CKAN ignore the offset and limit parameters and just return all orgs.
+            // To avoid paging forever in that scenario, we check if this page is identical to the last one
+            // and ignore the items if so.
+            if (
+                previous?.result &&
+                data?.result &&
+                previous.result.length === data.result.length &&
+                JSON.stringify(previous.result) === JSON.stringify(data.result)
+            ) {
+                data.result = [];
+            }
+            return data;
+        };
 
         return retry(
             operation,
