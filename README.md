@@ -6,8 +6,6 @@
 
 Magda Ckan Connector is created for crawling data from Ckan data source.
 
-> Please note: currently, the plugin is suffered from security vulnerabilities yet to be addressed. It might not work with newer version CKAN.
-
 ### Helm Chart
 
 It's recommanded to deploy connectors with as [dependencies](https://helm.sh/docs/topics/chart_best_practices/dependencies/) of a Magda helm deployment. Example can be found from [here](https://github.com/magda-io/magda-config).

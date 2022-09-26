@@ -1,7 +1,7 @@
 {
   "name": "@magda/ckan-connector",
   "description": "MAGDA CKAN Connector",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "scripts": {
     "prebuild": "rimraf dist tsconfig.tsbuildinfo",
     "build": "yarn run compile",
@@ -13,7 +13,7 @@
     "dev": "run-typescript-in-nodemon src/index.ts",
     "test": "mocha --require ts-node/register --userId dummy --jwtSecret dummy --sourceUrl dummy --tenantId 1 --id test --name test-name --require tsconfig-paths/register \"src/test/**/*.spec.ts\"",
     "docker-build-local": "create-docker-context-for-node-component --build --push --tag auto --local",
-    "docker-build-prod": "create-docker-context-for-node-component --build --push --tag auto",
+    "docker-build-prod": "create-docker-context-for-node-component --build --push --tag auto --version test",
     "helm-lint": "helm lint deploy/magda-ckan-connector -f deploy/test-deploy.yaml",
     "helm-docs": "helm-docs -t ./README.md.gotmpl -o ../../README.md",
     "update-all-charts": "helm dep up ./deploy/magda-ckan-connector",
