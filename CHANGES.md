@@ -5,6 +5,7 @@
 -   Upgrade to typescript 4 & webpack 5
 -   Upgrade @magda dependencies to v2
 -   Fix #10: retry the request when 0 count received for package_search request
+-   Release all artifacts to GitHub Container Registry (instead of docker.io & https://charts.magda.io)
 
 # 1.3.0
 
