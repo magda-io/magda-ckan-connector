@@ -3,7 +3,7 @@ import createBuilderOptions from "../createBuilderOptions";
 import URI from "urijs";
 import { forEachAsync } from "@magda/utils";
 import { Record } from "@magda/connector-sdk";
-import axios from "axios";
+import requestJson from "../requestJson";
 import createTransformerFromOption from "../createTransformer";
 
 export type RemoteDataHandlingResult = {
@@ -82,12 +82,7 @@ function getBaseUrl(url: string) {
         segments = uri.segment().slice(0, uri.segment().indexOf("dataset"));
     }
 
-    return uri
-        .clone()
-        .segment(segments)
-        .query("")
-        .fragment("")
-        .toString();
+    return uri.clone().segment(segments).query("").fragment("").toString();
 }
 
 function createSource(url: string) {
@@ -138,7 +133,7 @@ async function processDatasetAPIUrl(
 
     const distributions = source.getJsonDistributions(datasetJson);
     if (distributions) {
-        await forEachAsync(distributions, 1, async distribution => {
+        await forEachAsync(distributions, 1, async (distribution) => {
             result.distributions.push(
                 transformer.distributionJsonToRecord(distribution, datasetJson)
             );
@@ -161,24 +156,19 @@ async function processDistributionAPIUrl(
     const source = createSource(url);
     const transformer = await createTransformer(url);
 
-    const res = await axios.get(url);
-    if (res.status !== 200) {
-        throw new Error(
-            `Failed to retrieve data from url : ${url} Error: ${res.statusText}`
-        );
-    }
+    const data = await requestJson(url);
 
-    if (!res?.data?.result?.package_id || !res?.data?.result?.id) {
+    if (!data?.result?.package_id || !data?.result?.id) {
         throw new Error(
             `Failed to retrieve data from url : ${url} Error: can't locate dataset or distribution ID`
         );
     }
 
-    const datasetId = res.data.result.package_id;
+    const datasetId = data.result.package_id;
     const datasetJson = await source.getJsonDataset(datasetId);
     const datasetData = transformer.datasetJsonToRecord(datasetJson);
     const distributionData = transformer.distributionJsonToRecord(
-        res.data.result,
+        data.result,
         datasetJson
     );
     const result: RemoteDataHandlingResult = {
@@ -208,7 +198,7 @@ async function processDatasetWebUrl(
 
     const distributions = source.getJsonDistributions(datasetJson);
     if (distributions) {
-        await forEachAsync(distributions, 1, async distribution => {
+        await forEachAsync(distributions, 1, async (distribution) => {
             result.distributions.push(
                 transformer.distributionJsonToRecord(distribution, datasetJson)
             );
@@ -244,21 +234,16 @@ async function processDistributionWebUrl(
         .search({ id: distributionId })
         .toString();
 
-    const res = await axios.get(apiUrl);
-    if (res.status !== 200) {
-        throw new Error(
-            `Failed to retrieve data from url : ${url} Error: ${res.statusText}`
-        );
-    }
+    const data = await requestJson(apiUrl);
 
-    if (!res?.data?.result?.package_id || !res?.data?.result?.id) {
+    if (!data?.result?.package_id || !data?.result?.id) {
         throw new Error(
             `Failed to retrieve data from url : ${url} Error: can't locate dataset or distribution ID`
         );
     }
 
     const distributionData = transformer.distributionJsonToRecord(
-        res.data.result,
+        data.result,
         datasetJson
     );
 

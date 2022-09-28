@@ -1,6 +1,6 @@
 FROM openfaas/of-watchdog:0.7.6 as watchdog
 
-FROM node:12.22.1-alpine3.11 as ship
+FROM node:14-alpine as ship
 
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
 RUN chmod +x /usr/bin/fwatchdog && addgroup -S app && adduser app -S -G app

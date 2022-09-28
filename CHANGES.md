@@ -1,3 +1,13 @@
+# 2.0.0
+
+-   Upgrade to node 14
+-   Use node-fetch for all HTTP request
+-   Upgrade to typescript 4 & webpack 5
+-   Upgrade @magda dependencies to v2
+-   Fix #10: retry the request when 0 count received for package_search request
+-   Release all artifacts to GitHub Container Registry (instead of docker.io & https://charts.magda.io)
+-   Upgrade API version for CronJob to batch/v1 (for k8s v1.25 support)
+
 # 1.3.0
 
 -   Remove labels from metadata ( use labels in `spec` instead)

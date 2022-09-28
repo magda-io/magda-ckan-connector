@@ -6,37 +6,26 @@
 
 Magda Ckan Connector is created for crawling data from Ckan data source.
 
-> Please note: currently, the plugin is suffered from security vulnerabilities yet to be addressed. It might not work with newer version CKAN.
+### Release Registry
 
-### Helm Chart
+Since v2.0.0, we use [Github Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) as our official Helm Chart & Docker Image release registry.
 
-It's recommanded to deploy connectors with as [dependencies](https://helm.sh/docs/topics/chart_best_practices/dependencies/) of a Magda helm deployment. Example can be found from [here](https://github.com/magda-io/magda-config).
+It's recommended to deploy minions with as [dependencies](https://helm.sh/docs/topics/chart_best_practices/dependencies/) of a Magda helm deployment.
 
--   Magda Helm Charts Repository Url: https://charts.magda.io
-
-The [helm chart](https://helm.sh/docs/topics/charts/) for this connector is auto released when a [Github Release](https://help.github.com/en/github/administering-a-repository/creating-releases) is created for this repo.
-
--   Add repository to helm:
-
-```bash
-helm repo add magda-io https://charts.magda.io
+```yaml
+dependencies:
+    - name: magda-ckan-connector
+      version: "2.0.0"
+      repository: "oci://ghcr.io/magda-io/charts"
 ```
-
-### Docker Image
-
-Docker image releases can be found from Docker Hub:
-
-https://hub.docker.com/r/data61/magda-ckan-connector/
-
-Development releases (per commit) are also available from [GitHub Registry](https://github.com/magda-io/magda-ckan-connector/packages) and accessible with access token.
 
 ## Requirements
 
 Kubernetes: `>= 1.14.0-0`
 
-| Repository              | Name         | Version       |
-| ----------------------- | ------------ | ------------- |
-| https://charts.magda.io | magda-common | 1.0.0-alpha.4 |
+| Repository                    | Name         | Version |
+| ----------------------------- | ------------ | ------- |
+| oci://ghcr.io/magda-io/charts | magda-common | 2.0.1   |
 
 ## Values
 
@@ -51,7 +40,7 @@ Kubernetes: `>= 1.14.0-0`
 | createFunction                     | bool   | `false`                       |             |
 | defaultImage.imagePullSecret       | bool   | `false`                       |             |
 | defaultImage.pullPolicy            | string | `"IfNotPresent"`              |             |
-| defaultImage.repository            | string | `"docker.io/data61"`          |             |
+| defaultImage.repository            | string | `"ghcr.io/magda-io"`          |             |
 | defaultSettings.includeCronJobs    | bool   | `true`                        |             |
 | defaultSettings.includeInitialJobs | bool   | `false`                       |             |
 | defaultTenantId                    | int    | `0`                           |             |
