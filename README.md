@@ -10,18 +10,22 @@ Magda Ckan Connector is created for crawling data from Ckan data source.
 
 Since v2.0.0, we use [Github Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) as our official Helm Chart & Docker Image release registry.
 
-It's recommended to deploy minions with as [dependencies](https://helm.sh/docs/topics/chart_best_practices/dependencies/) of a Magda helm deployment.
+It's recommended to deploy connectors with as [dependencies](https://helm.sh/docs/topics/chart_best_practices/dependencies/) of a Magda helm deployment.
 
 ```yaml
 dependencies:
     - name: magda-ckan-connector
       version: "2.0.0"
+      alias: connector-xxx
       repository: "oci://ghcr.io/magda-io/charts"
+      tags:
+          - connectors
+          - connector-xxx
 ```
 
 ## Requirements
 
-Kubernetes: `>= 1.14.0-0`
+Kubernetes: `>= 1.21.0`
 
 | Repository                    | Name         | Version |
 | ----------------------------- | ------------ | ------- |
