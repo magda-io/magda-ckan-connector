@@ -5,6 +5,10 @@ on: push
 env:
   REPO_NAME: magda-ckan-connector
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build-test-docker:
     name: Build, Test & Push to Docker
