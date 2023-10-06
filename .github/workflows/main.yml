@@ -14,6 +14,15 @@ jobs:
     name: Build, Test & Push to Docker
     runs-on: ubuntu-latest
     steps:
+      - name: Set helm to v3.12.3
+        shell: bash
+        run: |
+          sudo rm /usr/local/bin/helm
+          sudo  curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > /tmp/helm.sh
+          sudo chmod +x /tmp/helm.sh
+          sudo /tmp/helm.sh --version v3.12.3
+          helm version
+
       - uses: actions/checkout@v2
       - name: Use Node.js 14
         uses: actions/setup-node@v1
