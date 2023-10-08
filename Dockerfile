@@ -1,4 +1,4 @@
-FROM openfaas/of-watchdog:0.7.6 as watchdog
+FROM ghcr.io/magda-io/of-watchdog:0.7.6 as watchdog
 
 FROM node:14-alpine as ship
 
