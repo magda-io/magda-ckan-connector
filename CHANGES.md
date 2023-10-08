@@ -1,3 +1,9 @@
+# 2.1.0
+
+-   Upgraded Magda connector SDK to v2.3.2. See [here](https://github.com/magda-io/magda/issues/3100)
+-   Upgraded helm-docs to v1.11.2
+-   Added more documentation
+
 # 2.0.0
 
 -   Upgrade to node 14

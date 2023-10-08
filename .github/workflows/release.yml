@@ -7,11 +7,24 @@ on:
 env:
   REPO_NAME: magda-ckan-connector
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   release-helm-chart:
     name: Release Helm Chart
     runs-on: ubuntu-latest
     steps:
+      - name: Set helm to v3.12.3
+        shell: bash
+        run: |
+          sudo rm /usr/local/bin/helm
+          sudo  curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > /tmp/helm.sh
+          sudo chmod +x /tmp/helm.sh
+          sudo /tmp/helm.sh --version v3.12.3
+          helm version
+
       - uses: actions/checkout@v2
 
       - name: Use Node.js 14
@@ -31,7 +44,7 @@ jobs:
       - name: Check Helm Chart Document
         run: |
           code=0
-          docker run --rm -v "$(pwd):/helm-docs" -u $(id -u) jnorwood/helm-docs:v1.5.0 -t ./README.md.gotmpl -o ../../README.md || code=$?;
+          docker run --rm -v "$(pwd):/helm-docs" -u $(id -u) jnorwood/helm-docs:v1.11.2 -t ./README.md.gotmpl -o ../../README.md || code=$?;
           if [ "$code" != "0" ]; then 
             echo "Failed to run helm-docs!";
             exit 1;
@@ -41,7 +54,7 @@ jobs:
           git ls-files -m | grep -i readme.md || code=$?;
           if [ "$code" == "0" ]; then
             echo -e "Some of helm chart docs are required to be updated using the [helm-docs](https://github.com/norwoodj/helm-docs) tool. \n
-            Please run helm-docs (v1.5.0) at project root, review & commit docs changes and push a new commit.";
+            Please run helm-docs (v1.11.2) at project root, review & commit docs changes and push a new commit.";
             exit 1;
           else 
             echo -e "helm docs check passed. helm docs update is not required.";

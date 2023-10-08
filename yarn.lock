@@ -87,33 +87,33 @@
     recursive-readdir "^2.2.2"
     yaml "^1.10.2"
 
-"@magda/connector-sdk@^2.0.0":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@magda/connector-sdk/-/connector-sdk-2.0.1.tgz#3756d9e979fc612c02f5c07c0dacd4e271ece8cd"
-  integrity sha512-cDP7xFtj+16SsoqrHxzcUV9kGss8ClLxJtJPW2p1lpwEJlwfI24pRW1cXGUoIRgEjHtbQZqJmZF84RFlcw9ong==
+"@magda/connector-sdk@^2.3.2-alpha.2":
+  version "2.3.2-alpha.2"
+  resolved "https://registry.yarnpkg.com/@magda/connector-sdk/-/connector-sdk-2.3.2-alpha.2.tgz#32e919fbdea0c6090ff71887fbbae9c8223cac26"
+  integrity sha512-Cm6r1Q8bF2s3l6Xz2giP9QZFB69Je7XdF8pVROU/xsHmM1yE7njGfgjZehKzOMwgphgwejzDnfIO3lYyOd1pJQ==
   dependencies:
     "@types/urijs" "^1.19.19"
     "@types/yargs" "^12.0.8"
 
-"@magda/docker-utils@^2.0.0":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@magda/docker-utils/-/docker-utils-2.0.1.tgz#67b023f13b5284ea23d82469e5209a466ec26f64"
-  integrity sha512-taTg4r8EwGhxq3VZ//wVovCrLiSHbKspsU5NiiewBKHgTpechvJfhezyQwlR2lo1JV1rSimI6/NPiaw31ai6Xw==
+"@magda/docker-utils@^2.3.2-alpha.2":
+  version "2.3.2-alpha.2"
+  resolved "https://registry.yarnpkg.com/@magda/docker-utils/-/docker-utils-2.3.2-alpha.2.tgz#f0f2a81a4d741411845cf3ae1b913f2a2a7ed4f3"
+  integrity sha512-bCsdS+AQsk1VHO0wLjUM+N+H59tg9JRxaaB8Om52Bf6C/R8PoHtJA7cOo4aRuTxviN1TkmhNY+J1yT7wxGeudQ==
   dependencies:
     fs-extra "^2.1.2"
     is-subdir "^1.0.2"
     lodash "^4.17.5"
     yargs "^12.0.5"
 
-"@magda/registry-aspects@^2.0.0":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@magda/registry-aspects/-/registry-aspects-2.0.1.tgz#dc121aeb82a4ca7c197151bae6d2794e5da8413f"
-  integrity sha512-R/hHU/TunUlJaO2FZXCXc+8bk1nQpVCQttFAOXUcQL/PhciPo3H1ViqQdA7dzLiBiI6xGlbIst4ODAPmwUzT0w==
+"@magda/registry-aspects@^2.3.2-alpha.2":
+  version "2.3.2-alpha.2"
+  resolved "https://registry.yarnpkg.com/@magda/registry-aspects/-/registry-aspects-2.3.2-alpha.2.tgz#16a33a24f9f868acd2da9d429de33ab994217ad2"
+  integrity sha512-MZbmZhejSw5a7SWEoY+fNJC67YrF8Y+S52KhBRgu8WLrI2PuNOhHacEneHzQemcb3qLS28aHxeWyBhjbZkr6KQ==
 
-"@magda/utils@^2.0.0":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@magda/utils/-/utils-2.0.1.tgz#c1900619e89f1841c4a94f0fef2a39e077ee5b3d"
-  integrity sha512-84HvoolBu3FCl8whfaeSUcX6X/kxQt7L8gcF558jHML41lJfwSn3TCCaDgWWsmfiuzChUdtuUMKpSR40IP8iLw==
+"@magda/utils@^2.3.2-alpha.2":
+  version "2.3.2-alpha.2"
+  resolved "https://registry.yarnpkg.com/@magda/utils/-/utils-2.3.2-alpha.2.tgz#883cedab4068c8df2c19cab655b7ab8bc184407b"
+  integrity sha512-kIBXsH/+eobadUz41F4QT5PQzl1PSjQitvsWrf7Ltmc1AUeeUl9WPihtir0mrv6XDV/O5i8LBTpZ54F1vxK4zA==
   dependencies:
     "@types/request" "^2.48.1"
 
