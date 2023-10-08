@@ -1,6 +1,6 @@
 ## Magda Ckan Connector
 
-![CI Workflow](https://github.com/magda-io/magda-ckan-connector/workflows/Main%20CI%20Workflow/badge.svg?branch=master) [![Release](https://img.shields.io/github/release/magda-io/magda-ckan-connector.svg)](https://github.com/magda-io/magda-ckan-connector/releases)
+![CI Workflow](https://github.com/magda-io/magda-ckan-connector/workflows/Main%20CI%20Workflow/badge.svg?branch=main) [![Release](https://img.shields.io/github/release/magda-io/magda-ckan-connector.svg)](https://github.com/magda-io/magda-ckan-connector/releases)
 
 [Magda](https://github.com/magda-io/magda) connectors go out to external datasources and copy their metadata into the Registry, so that they can be searched and have other aspects attached to them. A connector is simply a docker-based microservice that is invoked as a job. It scans the target datasource (usually an open-data portal), then completes and shuts down.
 
