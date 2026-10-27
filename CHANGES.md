@@ -1,3 +1,8 @@
+# 2.2.0
+
+-   Upgrade to Node.js 22: the docker image now uses `node:22-alpine` (was `node:14-alpine`), and CI uses Node.js 22
+-   Upgrade GitHub Actions (checkout, setup-node, setup-qemu & setup-buildx) to current versions
+
 # 2.1.0
 
 -   Upgraded Magda connector SDK to v2.3.2. See [here](https://github.com/magda-io/magda/issues/3100)
